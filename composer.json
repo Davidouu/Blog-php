@@ -1,0 +1,11 @@
+{
+    "name": "ddidn/blog-php",
+    "description": "Blog php from scratch, for a school project",
+    "authors": [
+        {
+            "name": "david.didnik",
+            "email": "david.didnik@leplusduweb.com"
+        }
+    ],
+    "require": {}
+}
