@@ -7,5 +7,11 @@
             "email": "david.didnik@leplusduweb.com"
         }
     ],
-    "require": {}
+    "require": {
+        "twig/twig": "^3.7",
+        "vlucas/phpdotenv": "^5.5"
+    },
+    "require-dev": {
+        "symfony/var-dumper": "^6.3"
+    }
 }
