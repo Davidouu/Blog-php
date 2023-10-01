@@ -2,6 +2,8 @@
 
 namespace App\Router;
 
+use Twig\Environment;
+
 class Route
 {
     private $path;
@@ -14,6 +16,9 @@ class Route
         $this->callable = $callable;
     }
 
+    /**
+     * Check if the route matches the URL.
+     */
     public function match($url)
     {
         $url = trim($url, '/');
@@ -27,12 +32,15 @@ class Route
         return true;
     }
 
-    public function call()
+    /**
+     * Call the controller method.
+     */
+    public function call(Environment $twig)
     {
         if (is_string($this->callable)) {
             $params = explode('#', $this->callable);
             $controller = 'App\\Controller\\'.$params[0];
-            $controller = new $controller();
+            $controller = new $controller($twig);
 
             return call_user_func_array([$controller, $params[1]], []);
         }

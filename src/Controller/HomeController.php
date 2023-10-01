@@ -2,10 +2,22 @@
 
 namespace App\Controller;
 
-class HomeController
+use Twig\Environment;
+
+class HomeController extends AbstractController
 {
+    public function __construct(Environment $twig)
+    {
+        parent::__construct($twig);
+    }
+
+    /*
+    * @return string
+    */
     public function index()
     {
-        echo 'Hello World';
+        return $this->render('index.html.twig', [
+            'title' => 'Home',
+        ]);
     }
 }
