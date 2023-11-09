@@ -27,6 +27,15 @@ class Router
         $this->routes['GET'][] = $route;
     }
 
+    /*
+    * Add a POST route.
+    */
+    public function post($path, $callable)
+    {
+        $route = new Route($path, $callable);
+        $this->routes['POST'][] = $route;
+    }
+
     /**
      * Run the router.
      */

@@ -14,6 +14,13 @@ class Routes
                     'method' => 'index',
                 ],
             ],
+            'articles' => [
+                'GET' => [
+                    'path' => '/articles',
+                    'controller' => 'ArticleController',
+                    'method' => 'index',
+                ],
+            ],
         ];
     }
 }
