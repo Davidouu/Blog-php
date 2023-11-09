@@ -11016,6 +11016,15 @@ nav.is-visible #Calque_1 .cls-2 {
   fill: #000;
 }
 
+/* Preview article */
+
+.img-fluid {
+  height: 200px;
+  object-fit: cover;
+  width: 100%;
+  border-radius: 6px;
+}
+
 /* Footer */
 
 #menu-footer {
