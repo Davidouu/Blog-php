@@ -3,6 +3,9 @@
 namespace App\Repository;
 
 use App\DAL;
+use App\Entity\Article;
+use App\Entity\Category;
+use App\Entity\User;
 use App\Hydrator;
 
 class ArticlesRepository
@@ -35,9 +38,23 @@ class ArticlesRepository
         $this->dal->execute($sql);
         $data = $this->dal->fetchData('all');
 
-        // foreach ($data as $key => $value) {
-        // }
+        foreach ($data as &$article) {
+            $categroy = new Category();
+            $this->hydrator->hydrate($categroy, $article);
 
-        return $data;
+            $article['category'] = $categroy;
+
+            $user = new User();
+            $this->hydrator->hydrate($user, $article);
+
+            $article['author'] = $user;
+
+            $articleObject = new Article();
+            $this->hydrator->hydrate($articleObject, $article);
+
+            $articles[] = $articleObject;
+        }
+
+        return $articles;
     }
 }

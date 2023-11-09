@@ -20,7 +20,7 @@ class ArticleController extends AbstractController
     */
     public function index()
     {
-        $articles = $this->articlesRepository->getAllArticles(null, null);
+        $articles = $this->articlesRepository->getAllArticles(['column' => 'updateDate', 'order' => 'DESC'], null);
 
         return $this->render('articles.html.twig', ['articles' => $articles]);
     }

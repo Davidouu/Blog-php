@@ -21,10 +21,10 @@
 						</a>
 						<p class="post-meta">
 							Posté par
-							{{ article.firstName }} {{ article.lastName }}
+							{{ article.author.firstName }} {{ article.author.lastName }}
 							le
 							{{ article.publishDate|date("d/m/Y") }}
-							| Catégorie : {{ article.name }}
+							| Catégorie : {{ article.category.name }}
 						</p>							
 					</div>
 
