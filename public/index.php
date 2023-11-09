@@ -7,6 +7,9 @@ use App\Router\Router;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__.'/../', '.env.local');
+$dotenv->load();
+
 $loader = new FilesystemLoader(__DIR__.'/../templates/');
 $twig = new Environment($loader, ['debug' => true]);
 

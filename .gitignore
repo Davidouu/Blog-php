@@ -1,2 +1,6 @@
+/.env.local
+/.env.local.php
+/.env.*.local
+
 /vendor/
 pint.json
