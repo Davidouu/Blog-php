@@ -41,16 +41,26 @@ class Dal
     }
 
     // Fetch data
-    public function fetchData(string $fetchType = 'all'): array
+    public function fetchData(string $fetchType): array
     {
         try {
             if ($fetchType === 'all') {
-                return $this->stmt->fetchAll(\PDO::FETCH_ASSOC);
+                $data = $this->stmt->fetchAll(\PDO::FETCH_ASSOC);
+
+                return $data;
             } elseif ($fetchType === 'one') {
-                return $this->stmt->fetch(\PDO::FETCH_ASSOC);
+                $data = $this->stmt->fetch(\PDO::FETCH_ASSOC);
+
+                return $data;
             }
         } catch (\PDOException $e) {
             throw new \PDOException($e->getMessage());
         }
+    }
+
+    // Get last insert id
+    public function getLastInsertId(): int
+    {
+        return $this->pdo->lastInsertId();
     }
 }

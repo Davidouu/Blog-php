@@ -2,16 +2,24 @@
 
 namespace App\Entity;
 
+use App\Validator\IsNotEmpty;
+use App\Validator\IsValidEmail;
+use App\Validator\IsValidPassword;
+
 class User
 {
     private int $id;
 
+    #[IsNotEmpty(message: 'Le prénom est obligatoire')]
     private string $firstName;
 
-    private string $lastname;
+    #[IsNotEmpty(message: 'Le nom est obligatoire')]
+    private string $lastName;
 
+    #[IsNotEmpty(message: 'L\'email est obligatoire'), IsValidEmail(message: 'L\'email n\'est pas valide')]
     private string $email;
 
+    #[IsValidPassword(message: 'Le mot de passe doit contenir au moins 8 caractères dont une majuscule, une minuscule, un chiffre et un caractère spécial'), IsNotEmpty(message: 'Le mot de passe est obligatoire')]
     private string $password;
 
     private string $role;
@@ -21,6 +29,12 @@ class User
     private ?string $confirmationToken;
 
     private \DateTime $validateAt;
+
+    public function __construct()
+    {
+        $this->role = 'user';
+        $this->profilPictureUrl = 'images/user-placeholder.jpg';
+    }
 
     // Setters
     public function setId(int $id): self
@@ -39,7 +53,7 @@ class User
 
     public function setLastname(string $lastname): self
     {
-        $this->lastname = $lastname;
+        $this->lastName = $lastname;
 
         return $this;
     }
@@ -79,7 +93,7 @@ class User
         return $this;
     }
 
-    public function setValidateAt(\DateTime $validateAt): self
+    public function setValidateAt(?\DateTime $validateAt): self
     {
         $this->validateAt = $validateAt;
 
@@ -99,7 +113,7 @@ class User
 
     public function getLastname(): string
     {
-        return strtoupper($this->lastname);
+        return strtoupper($this->lastName);
     }
 
     public function getEmail(): string
@@ -112,12 +126,12 @@ class User
         return $this->password;
     }
 
-    public function getRole(): string
+    public function getRole(): ?string
     {
         return $this->role;
     }
 
-    public function getProfilPictureUrl(): string
+    public function getProfilPictureUrl(): ?string
     {
         return $this->profilPictureUrl;
     }
@@ -127,7 +141,7 @@ class User
         return $this->confirmationToken;
     }
 
-    public function getValidateAt(): \DateTime
+    public function getValidateAt(): ?\DateTime
     {
         return $this->validateAt;
     }

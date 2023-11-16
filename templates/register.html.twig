@@ -1,0 +1,51 @@
+{% extends "base.html.twig" %}
+
+{% block title %}David Didnik - Inscription
+{% endblock %}
+
+{% block content %}
+<div class="container px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+        <div class="col-md-10 col-lg-8 col-xl-7">
+
+        {% include 'message.html.twig' %}
+
+            <div class="my-5">
+                <form id="contactForm" method="POST" action="">
+                    <div class="form-floating">
+                        <input class="form-control" id="lastName" name="lastName" type="text" placeholder="Entrer votre nom" {% if post.lastName %} value="{{ post.lastName }}" {% endif %} required/>
+                        <label for="lastName">Nom*</label>
+                        {% if errors.lastName %}
+                        <small class="small-test-error">{{ errors.lastName }}</small>
+                        {% endif %}
+                    </div>
+                    <div class="form-floating">
+                        <input class="form-control" id="firstName" name="firstName" type="text" placeholder="Entrer votre prénom" {% if post.firstName %} value="{{ post.firstName }}" {% endif %} required/>
+                        <label for="firstName">Prénom*</label>
+                        {% if errors.firstName %}
+                        <small class="small-test-error">{{ errors.firstName }}</small>
+						{% endif %}
+                    </div>
+                    <div class="form-floating">
+                        <input class="form-control" id="email" name="email" type="email" placeholder="Entrer votre e-mail" {% if post.email %} value="{{ post.email }}" {% endif %} required/>
+                        <label for="mail">Email*</label>
+                        {% if errors.email %}
+                        <small class="small-test-error">{{ errors.email }}</small>
+                        {% endif %}
+                    </div>
+                    <div class="form-floating">
+                        <input class="form-control" id="password" name="password" type="password" placeholder="Entrer un mot de passe" {% if post.password %} value="{{ post.password }}" {% endif %} required/>
+                        <label for="password">Mot de passe*</label>
+                        {% if errors.password %}
+                        <small class="small-test-error">{{ errors.password }}</small>
+                        {% endif %}
+                    </div>
+                    {# Submit Button #}
+                    <button class="btn btn-primary text-uppercase" id="submitButton" type="submit">Send</button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock %}
