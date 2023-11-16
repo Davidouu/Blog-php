@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Http\Request;
+use App\Http\Session;
 use App\Repository\ArticlesRepository;
 use Twig\Environment;
 
@@ -9,10 +11,10 @@ class ArticleController extends AbstractController
 {
     private ArticlesRepository $articlesRepository;
 
-    public function __construct(Environment $twig)
+    public function __construct(Environment $twig, Request $request, Session $session)
     {
         $this->articlesRepository = new ArticlesRepository();
-        parent::__construct($twig);
+        parent::__construct($twig, $request, $session);
     }
 
     /*
