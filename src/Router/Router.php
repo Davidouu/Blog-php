@@ -2,18 +2,19 @@
 
 namespace App\Router;
 
+use App\Http\Request;
+use App\Http\Session;
 use Twig\Environment;
 
 class Router
 {
-    private string $url;
-
     private $routes = [];
 
     public function __construct(
-        // private string $url,
-        $url,
+        private string $url,
         private Environment $twig,
+        private Request $request,
+        private Session $session,
     ) {
         $this->url = trim($url, '/');
     }
@@ -41,12 +42,20 @@ class Router
      */
     public function run()
     {
+        if (! isset($this->routes[$this->request->getMethod()])) {
+            // header('HTTP/1.0 404 Not Found');
 
-        foreach ($this->routes['GET'] as $route) {
+            // return $this->twig->render('404.html.twig');
+        }
+
+        foreach ($this->routes[$this->request->getMethod()] as $route) {
             if ($route->match($this->url)) {
-
-                return $route->call($this->twig);
+                return $route->call($this->twig, $this->request, $this->session);
             }
         }
+
+        // header('HTTP/1.0 404 Not Found');
+
+        // return $this->twig->render('404.html.twig');
     }
 }
