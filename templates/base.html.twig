@@ -62,9 +62,16 @@
 						<li class="nav-item">
 							<a class="nav-link px-lg-3 py-3 py-lg-4" href="/#contact">Contact</a>
 						</li>
+						{% if session.get('user') %}
 						<li class="nav-item">
-							<a class="nav-link px-lg-3 py-3 py-lg-4" href="">Profil (ou connexion / inscription)</a>
+							<a class="nav-link px-lg-3 py-3 py-lg-4" href="/profil">Profil</a>
 						</li>
+						{% else %}
+						<li class="nav-item">
+							<a class="nav-link px-lg-3 py-3 py-lg-4" href="/inscription">Inscription / Connexion</a>
+						</li>
+						{% endif %}
+						
 					</ul>
 				</div>
 			</div>
