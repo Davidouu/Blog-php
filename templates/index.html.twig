@@ -7,10 +7,33 @@
 	<div class="container px-4 px-lg-5">
 		<div class="row gx-4 gx-lg-5 justify-content-center">
 			<div class="col-md-10 col-lg-8 col-xl-7">
-				<div>
-					<span>Future block des articles de blog mis en avant</span>
+			{% for article in articles%}
+				{% if article.isValidated is same as (false) or article.promote is same as (false) %}
+
+				{% else %}
+				
+				<!-- Post preview-->
+				<div class="post-preview">
+					<a href="/article/{{article.id}}/{{article.slug}}">
+						<h2 class="post-title">{{ article.title }}</h2>
+						<h3 class="post-subtitle">{{ article.excerpt }}</h3>
+						<img src="{{ article.thumbnailUrl }}" alt="{{ article.title }}" class="img-fluid">
+					</a>
+					<p class="post-meta">
+						Posté par
+						{{ article.author.firstName }} {{ article.author.lastName }}
+						le
+						{{ article.publishDate|date("d/m/Y") }}
+						| Catégorie : {{ article.category.name }}
+					</p>							
 				</div>
+
+				<!-- Divider-->
 				<hr class="my-4"/>
+				
+				{% endif %}
+
+				{% endfor %}
 				<h3>Contactez-moi !</h3>
 				{# Contact form #}
 				<div class="my-5">
