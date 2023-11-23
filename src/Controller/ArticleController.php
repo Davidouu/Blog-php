@@ -20,10 +20,26 @@ class ArticleController extends AbstractController
     /*
     * @return string
     */
-    public function index()
+    public function index(): string
     {
         $articles = $this->articlesRepository->getAllArticles(['column' => 'updateDate', 'order' => 'DESC'], null);
 
         return $this->render('articles.html.twig', ['articles' => $articles]);
+    }
+
+    /*
+    * @param int $id
+    * @param string $slug
+    * @return string
+    */
+    public function show(int $id, string $slug): string
+    {
+        $article = $this->articlesRepository->getArticleById($id);
+
+        if ($article === null) {
+            $this->redirect('/articles');
+        }
+
+        return $this->render('article.html.twig', ['article' => $article]);
     }
 }
