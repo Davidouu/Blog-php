@@ -57,4 +57,36 @@ class ArticlesRepository
 
         return $articles;
     }
+
+    // Get article by id
+    public function getArticleById(int $id): ?array
+    {
+        $sql = 'SELECT * FROM article
+                INNER JOIN category ON article.categoryId = category.id 
+                INNER JOIN user ON article.authorId = user.id
+                WHERE article.id = :id';
+
+        $this->dal->execute($sql, ['id' => $id]);
+        $data = $this->dal->fetchData('one');
+
+        if ($data === false) {
+            return null;
+        }
+
+        $categroy = new Category();
+        $this->hydrator->hydrate($categroy, $data);
+
+        $data['category'] = $categroy;
+
+        $user = new User();
+        $this->hydrator->hydrate($user, $data);
+
+        $data['author'] = $user;
+
+        $articleObject = new Article();
+        $this->hydrator->hydrate($articleObject, $data);
+
+        return $data;
+
+    }
 }

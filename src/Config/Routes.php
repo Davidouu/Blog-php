@@ -23,6 +23,14 @@ class Routes
                 ],
             ],
 
+            'article' => [
+                'GET' => [
+                    'path' => '/article/:id/:slug',
+                    'controller' => 'ArticleController',
+                    'method' => 'show',
+                ],
+            ],
+
             'register' => [
                 'GET' => [
                     'path' => '/inscription',

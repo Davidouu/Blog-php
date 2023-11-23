@@ -12,6 +12,10 @@
 				</h2>
 
 				{% for article in articles%}
+					{% if article.isValidated == false %}
+
+					{% else %}
+					
 					<!-- Post preview-->
 					<div class="post-preview">
 						<a href="/article/{{article.id}}/{{article.slug}}">
@@ -27,6 +31,8 @@
 							| Catégorie : {{ article.category.name }}
 						</p>							
 					</div>
+					
+					{% endif %}
 
 					{% if loop.last %}
 

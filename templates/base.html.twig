@@ -9,12 +9,14 @@
 			{% block title %}{% endblock %}
 		</title>
 
+		{% block stylesheets %}{% endblock %}
+
 		<!-- Font Awesome icons (free version)-->
 		<script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
 		<!-- Bootstrap theme fonts -->
 		<link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css"/>
 		<link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css"/>
-		<link rel="stylesheet" href="assets/css/style.css" type="text/css"/>
+		<link rel="stylesheet" href="/assets/css/style.css" type="text/css"/>
 	</head>
 
 	<body>
@@ -77,7 +79,7 @@
 			</div>
 		</nav>
 		<!-- Page Header-->
-		<header class="masthead" style="background-image: url('assets/img/home-bg.jpg')">
+		<header class="masthead" style="background-image: url('/assets/img/home-bg.jpg')">
 			<div class="container position-relative px-4 px-lg-5">
 				<div class="row gx-4 gx-lg-5 justify-content-center">
 					<div class="col-md-10 col-lg-8 col-xl-7">
