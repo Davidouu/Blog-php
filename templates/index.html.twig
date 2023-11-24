@@ -34,25 +34,40 @@
 				{% endif %}
 
 				{% endfor %}
+
+				{% include 'message.html.twig' %}
+				
 				<h3>Contactez-moi !</h3>
 				{# Contact form #}
 				<div class="my-5">
-					<form id="contactForm">
+					<form id="contactForm" action="" method="POST">
 						<div class="form-floating">
-							<input class="form-control" id="name" type="text" placeholder="Enter your name..."/>
+							<input class="form-control" id="name" type="text" name="name" placeholder="Enter your name..."/>
 							<label for="name">Name</label>
+							{% if errors.name %}
+								<small class="small-test-error">{{ errors.name }}</small>
+							{% endif %}
 						</div>
 						<div class="form-floating">
-							<input class="form-control" id="email" type="email" placeholder="Enter your email..."/>
+							<input class="form-control" id="email" type="email" name="email" placeholder="Enter your email..."/>
 							<label for="email">Email address</label>
+							{% if errors.email %}
+								<small class="small-test-error">{{ errors.email }}</small>
+							{% endif %}
 						</div>
 						<div class="form-floating">
-							<input class="form-control" id="phone" type="tel" placeholder="Enter your phone number..."/>
+							<input class="form-control" id="phone" type="tel" name="phone" placeholder="Enter your phone number..."/>
 							<label for="phone">Phone Number</label>
+							{% if errors.phone %}
+								<small class="small-test-error">{{ errors.phone }}</small>
+							{% endif %}
 						</div>
 						<div class="form-floating">
-							<textarea class="form-control" id="message" placeholder="Enter your message here..." style="height: 12rem"></textarea>
+							<textarea class="form-control" id="message" name="message" placeholder="Enter your message here..." style="height: 12rem"></textarea>
 							<label for="message">Message</label>
+							{% if errors.message %}
+								<small class="small-test-error">{{ errors.message }}</small>
+							{% endif %}
 						</div>
 						{# Submit Button #}
 						<button class="btn btn-primary text-uppercase" id="submitButton" type="submit">Send</button>

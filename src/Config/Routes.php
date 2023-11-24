@@ -13,6 +13,11 @@ class Routes
                     'controller' => 'HomeController',
                     'method' => 'index',
                 ],
+                'POST' => [
+                    'path' => '/',
+                    'controller' => 'HomeController',
+                    'method' => 'index',
+                ],
             ],
 
             'articles' => [
