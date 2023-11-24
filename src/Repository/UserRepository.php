@@ -28,7 +28,7 @@ class UserRepository
 
         if (! empty($data)) {
             $user = new User();
-            $this->hydrator->hydrate($user, $data);
+            $this->hydrator->hydrate($user, $data[0]);
 
             return $user;
         }
@@ -93,5 +93,35 @@ class UserRepository
             'validateAt' => $user->getValidateAt()->format('Y-m-d H:i:s'),
             'id' => $user->getId(),
         ]);
+    }
+
+    // Check if user is validate
+    public function checkConfirmationAccount(User $user): bool
+    {
+        $sql = 'SELECT validateAt FROM user WHERE email = :email';
+
+        $this->dal->execute($sql, ['email' => $user->getEmail()]);
+        $data = $this->dal->fetchData('one');
+
+        if (! empty($data) && $data['validateAt'] === null) {
+            return false;
+        }
+
+        return true;
+    }
+
+    // Get password hash
+    public function getPasswordHash(User $user): bool|string
+    {
+        $sql = 'SELECT password FROM user WHERE email = :email';
+
+        $this->dal->execute($sql, ['email' => $user->getEmail()]);
+        $data = $this->dal->fetchData('one');
+
+        if (! empty($data)) {
+            return $data['password'];
+        }
+
+        return false;
     }
 }
