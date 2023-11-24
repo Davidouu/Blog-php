@@ -69,6 +69,14 @@ class Routes
                     'method' => 'login',
                 ],
             ],
+
+            'logout' => [
+                'GET' => [
+                    'path' => '/deconnexion',
+                    'controller' => 'UserController',
+                    'method' => 'logout',
+                ],
+            ],
         ];
     }
 }
