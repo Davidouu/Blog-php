@@ -91,11 +91,41 @@ class UserController extends AbstractController
     // Login user
     public function login(): string
     {
-        // If not connected redirect to register
-        if ($this->session->get('user') === null) {
-            $this->redirect('/inscription');
+        // If connected redirect to index
+        if ($this->session->get('user') !== null) {
+            $this->redirect('/');
         }
 
-        return $this->render('connexion.html.twig');
+        if (empty($this->request->getParams('POST'))) {
+            return $this->render('connexion.html.twig');
+        }
+
+        $user = new User();
+        $user->setEmail($this->request->getParam('POST', 'email'));
+        $user->setPassword($this->request->getParam('POST', 'password'));
+
+        // Si aucun utilisateur n'est trouvé avec l'email saisi on redirige vers la page de connexion
+        if (! $this->UserRepository->getUserByEmail($user->setEmail($this->request->getParam('POST', 'email')))) {
+            return $this->render('connexion.html.twig', ['message' => 'Aucun compte n\'est associé à cette adresse mail !']);
+        }
+
+        // Si l'utilisateur n'a pas confirmé son compte on redirige vers la page de connexion
+        if (! $this->UserRepository->checkConfirmationAccount($user)) {
+            return $this->render('connexion.html.twig', ['message' => 'Vous devez confirmer votre compte !']);
+        }
+
+        if ($user && password_verify($this->request->getParam('POST', 'password'), $this->UserRepository->getPasswordHash($user))) {
+            $this->session->set('user', $user);
+            $this->redirect('/');
+        }
+
+        return $this->render('connexion.html.twig', ['message' => 'Le mot de passe est incorrect !']);
+    }
+
+    // Logout user
+    public function logout(): void
+    {
+        $this->session->delete('user');
+        $this->redirect('/');
     }
 }
