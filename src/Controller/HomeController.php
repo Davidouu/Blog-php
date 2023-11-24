@@ -23,11 +23,53 @@ class HomeController extends AbstractController
     */
     public function index()
     {
-        $articles = $this->articlesRepository->getAllArticles(['column' => 'updateDate', 'order' => 'DESC'], null);
+        if (empty($this->request->getParams('POST'))) {
+            $articles = $this->articlesRepository->getAllArticles(['column' => 'updateDate', 'order' => 'DESC'], null);
 
-        return $this->render('index.html.twig', [
-            'title' => 'Home',
-            'articles' => $articles,
-        ]);
+            return $this->render('index.html.twig', [
+                'title' => 'Home',
+                'articles' => $articles,
+            ]);
+        }
+
+        foreach ($this->request->getParams('POST') as $key => $value) {
+            if (empty($value)) {
+                $errors[$key] = 'Le champ ne doit pas être vide';
+            }
+
+            if ($key === 'email' && ! filter_var($value, FILTER_VALIDATE_EMAIL)) {
+                $errors[$key] = 'Le champ doit être un email valide';
+            }
+        }
+
+        if (! empty($errors)) {
+            return $this->render('index.html.twig', [
+                'title' => 'Home',
+                'errors' => $errors,
+            ]);
+        }
+
+        $name = $this->request->getParams('POST')['name'];
+        $email = $this->request->getParams('POST')['email'];
+        $number = $this->request->getParams('POST')['phone'];
+        $message = $this->request->getParams('POST')['message'];
+
+        $mail = mail(
+            'ddidnik@hotmail.fr',
+            'Demande de contact.',
+            "Vous avez reçu un mail depuis le formulaire de contact.<br><br>Nom : $name<br>Email : $email<br>Numéro : $number<br>Message : $message"
+        );
+
+        if ($mail) {
+            $this->render('index.html.twig', [
+                'title' => 'Home',
+                'message' => 'Votre message a bien été envoyé',
+            ]);
+        } else {
+            $this->render('index.html.twig', [
+                'title' => 'Home',
+                'message' => 'Il y a eu une erreur lors de l\'envoi du message',
+            ]);
+        }
     }
 }
