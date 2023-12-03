@@ -85,6 +85,19 @@ class Routes
                     'method' => 'index',
                 ],
             ],
+
+            'newArticle' => [
+                'GET' => [
+                    'path' => '/admin/article/nouveau',
+                    'controller' => 'ArticleController',
+                    'method' => 'newArticle',
+                ],
+                'POST' => [
+                    'path' => '/admin/article/nouveau',
+                    'controller' => 'ArticleController',
+                    'method' => 'newArticle',
+                ],
+            ],
         ];
     }
 }
