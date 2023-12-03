@@ -1,0 +1,58 @@
+<div class="my-5">
+	<form id="new-article" action="" method="POST">
+
+		<div class="form-floating">
+			<input class="form-control" id="title" type="text" name="title" required/>
+			<label for="title">Titre*</label>
+			{% if errors %}
+				<small class="small-test-error"></small>
+			{% endif %}
+		</div>
+
+        <div class="form-floating">
+			<input class="form-control" id="excerpt" type="text" name="excerpt"/ required>
+			<label for="excerpt">Extrait*</label>
+			{% if errors %}
+				<small class="small-test-error"></small>
+			{% endif %}
+		</div>
+
+        <div class="form-floating">
+			<textarea class="form-control" id="content" type="text" name="content" cols="30" rows="8" required></textarea>
+			<label for="content">Contenue*</label>
+			{% if errors %}
+				<small class="small-test-error"></small>
+			{% endif %}
+		</div>
+
+        <div class="form-floating">
+			<input class="form-control" id="thumbnail" type="file" name="thumbnail"/>
+			<label for="thumbnail">Image de mise en avant</label>
+			{% if errors %}
+				<small class="small-test-error"></small>
+			{% endif %}
+		</div>
+
+        <div class="form-floating mb-5">
+            <select class="form-select" id="category" name="category" required>
+                <option value="" selected disabled>Choisir une catégorie</option>
+                {% for category in categories %}
+                    <option value="{{ category.id }}">{{ category.name }}</option>
+                {% endfor %}
+            </select>
+			<label for="category">Catégorie*</label>
+			{% if errors %}
+				<small class="small-test-error"></small>
+			{% endif %}
+		</div>
+
+        <div class="form-check">
+            <input class="form-check-input" id="trending" type="checkbox" name="trending" value="0"/>
+            <label for="trending">Mis en avant sur l'accueil</label>
+        </div>
+
+        <div class="form-floating">
+            <input class="btn btn-primary" type="submit" value="{{ button_label }}"/>
+        </div>
+    </form>
+</div>

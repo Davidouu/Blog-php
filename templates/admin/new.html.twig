@@ -1,0 +1,19 @@
+{% extends "admin/base.html.twig" %}
+
+{% block title %}David Didnik - Nouvel article
+{% endblock %}
+
+{% block content %}
+<div class="container px-4 px-lg-5 admin-padding">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+        <div class="col-md-10 col-lg-8 col-xl-7">
+            <h1>Nouvel article</h1>
+
+            {{ include('admin/_form.html.twig', {'button_label': 'Créer'}) }}
+
+            <a href="/admin">Retour au tableau de bord</a>
+
+        </div>
+    </div>
+</div>
+{% endblock %}
