@@ -77,6 +77,14 @@ class Routes
                     'method' => 'logout',
                 ],
             ],
+
+            'admin' => [
+                'GET' => [
+                    'path' => '/admin',
+                    'controller' => 'AdminController',
+                    'method' => 'index',
+                ],
+            ],
         ];
     }
 }
