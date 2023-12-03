@@ -1,0 +1,77 @@
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1"/>
+		<meta name="author" content="David Didnik">
+		<meta name="robots" content="noindex">
+
+		<title>
+			{% block title %}{% endblock %}
+		</title>
+
+		{% block stylesheets %}{% endblock %}
+
+		<!-- Font Awesome icons (free version)-->
+		<script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+		<!-- Bootstrap theme fonts -->
+		<link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css"/>
+		<link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css"/>
+		<link rel="stylesheet" href="/assets/css/style.css" type="text/css"/>
+	</head>
+
+	<body>
+		<!-- Navigation-->
+		<nav class="navbar navbar-expand-lg navbar-light" id="mainNav" style="background-color: #f0e9df;">
+			<div class="container px-4 px-lg-5">
+				<a
+					class="navbar-brand" href="/">
+					<!-- Logo Svg -->
+					<svg style="height: 50px;" id="Calque_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewbox="0 0 512 512">
+						<defs>
+							<style>
+								.cls-1 {
+									clip-path: url('#clippath');
+								}
+								.cls-2 {
+									fill: none;
+								}
+								.cls-3 {
+									fill: #000;
+								}
+							</style>
+							<clipPath id="clippath">
+								<rect class="cls-2" x="-2" y="72.36" width="515" height="374.29"/>
+							</clipPath>
+						</defs>
+						<g class="cls-1">
+							<path class="cls-3" d="M340.51,98.25h-47.5c-.72,0-1.3,.58-1.3,1.3v15.35c0,.72,.58,1.3,1.3,1.3h47.5c89.27,0,148.26,62.82,148.26,154.45,0,92.1-54.04,154.45-143.31,154.45h-94.36c-.72,0-1.3-.58-1.3-1.3V223.85s0-20.36,0-20.36c0-.72-.58-1.3-1.3-1.3h-11.08c-.72,0-1.3,.58-1.3,1.3v238.25c0,.72,.58,1.3,1.3,1.3h108.04c97.3,0,162.68-67.07,162.68-172.4,0-104.86-70.33-172.4-167.63-172.4Z"/>
+							<path class="cls-3" d="M172.36,420.77h47.5c.72,0,1.3-.58,1.3-1.3v-15.35c0-.72-.58-1.3-1.3-1.3h-47.5c-89.27,0-148.26-62.82-148.26-154.45,0-92.1,54.04-154.45,143.31-154.45h94.36c.72,0,1.3,.58,1.3,1.3v199.94s0,20.36,0,20.36c0,.72,.58,1.3,1.3,1.3h11.08c.72,0,1.3-.58,1.3-1.3V77.28c0-.72-.58-1.3-1.3-1.3h-108.04c-97.3,0-162.68,67.07-162.68,172.4,0,104.86,70.33,172.4,167.63,172.4Z"/>
+						</g>
+					</svg>
+				</a>
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+					Menu
+					<i class="fas fa-bars"></i>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarResponsive">
+					<ul class="navbar-nav ms-auto py-4 py-lg-0">
+						<li class="nav-item">
+							<a class="nav-link px-lg-3 py-3 py-lg-4"  style="color: #000;" href="/">Home</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link px-lg-3 py-3 py-lg-4" style="color: #000;" href="/new-article">Nouvel article</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+
+		{% block content %}{% endblock %}
+
+		
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+		<!-- Core theme JS-->
+		<script src="assets/js/bootstrap.js"></script>
+		{% block scripts %}{% endblock %}
+	</body>
+</html>
