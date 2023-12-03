@@ -32,7 +32,6 @@ class User
 
     public function __construct()
     {
-        $this->role = 'user';
         $this->profilPictureUrl = 'images/user-placeholder.jpg';
     }
 

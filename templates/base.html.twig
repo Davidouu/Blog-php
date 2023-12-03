@@ -65,9 +65,15 @@
 							<a class="nav-link px-lg-3 py-3 py-lg-4" href="/#contact">Contact</a>
 						</li>
 						{% if session.get('user') %}
-						<li class="nav-item">
-							<a class="nav-link px-lg-3 py-3 py-lg-4" href="/deconnexion">Déconnexion</a>
-						</li>
+							{% if session.get('user').role == 'admin' or session.get('user').role == 'editor' %}
+							<li class="nav-item">
+								<a class="nav-link px-lg-3 py-3 py-lg-4" href="/admin">Administration</a>
+							</li>
+							{% else %}
+							<li class="nav-item">
+								<a class="nav-link px-lg-3 py-3 py-lg-4" href="/profil">profil</a>
+							</li>
+							{% endif %}
 						{% else %}
 						<li class="nav-item">
 							<a class="nav-link px-lg-3 py-3 py-lg-4" href="/inscription">Inscription / Connexion</a>
@@ -107,7 +113,9 @@
 								<li><a href="/articles">Articles</a></li>
 								<li><a href="#">Contact</a></li>
 								<li><a href="#">CV</a></li>
-								<li><a href="#">Administration (si utilisateur connecté + si utilisateur administrateur)</a></li>
+								{% if session.get('user') and session.get('user').role == 'admin' or session.get('user').role == 'editor' %}
+								<li><a href="/admin">Administration</a></li>
+								{% endif %}
 							</ul>
 						</div>
 						<ul class="list-inline text-center">

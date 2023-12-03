@@ -124,4 +124,19 @@ class UserRepository
 
         return false;
     }
+
+    // Get role
+    public function getRole(User $user): bool|string
+    {
+        $sql = 'SELECT role FROM user WHERE email = :email';
+
+        $this->dal->execute($sql, ['email' => $user->getEmail()]);
+        $data = $this->dal->fetchData('one');
+
+        if (! empty($data)) {
+            return $data['role'];
+        }
+
+        return false;
+    }
 }
