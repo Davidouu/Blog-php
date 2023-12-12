@@ -104,6 +104,7 @@ class UserController extends AbstractController
         $user->setEmail($this->request->getParam('POST', 'email'));
         $user->setPassword($this->request->getParam('POST', 'password'));
         $user->setRole($this->UserRepository->getRole($user));
+        $user->setId($this->UserRepository->getIdByMail($user));
 
         // Si aucun utilisateur n'est trouvé avec l'email saisi on redirige vers la page de connexion
         if (! $this->UserRepository->getUserByEmail($user->setEmail($this->request->getParam('POST', 'email')))) {
