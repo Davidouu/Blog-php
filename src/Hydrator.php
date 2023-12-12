@@ -4,7 +4,9 @@ namespace App;
 
 class Hydrator
 {
-    // Dates
+    /*
+    * @var array
+    */
     private const DATES = [
         'publishDate',
         'updateDate',
@@ -12,7 +14,10 @@ class Hydrator
         'validateAt',
     ];
 
-    // Hydrate the entity
+    /*
+    * @param object $entity
+    * @param array $data
+    */
     public function Hydrate(object $entity, array $data)
     {
         foreach ($data as $key => $value) {
