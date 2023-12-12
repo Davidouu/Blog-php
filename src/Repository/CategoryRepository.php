@@ -18,6 +18,9 @@ class CategoryRepository
         $this->hydrator = new Hydrator();
     }
 
+    /*
+    * @return Category[]
+    */
     public function getAllCategories()
     {
         $sql = 'SELECT * FROM category';
@@ -33,5 +36,26 @@ class CategoryRepository
         }
 
         return $categories;
+    }
+
+    /*
+    * @param int $id
+    * @return Category|null
+    */
+    public function getCategoryById(int $id)
+    {
+        $sql = 'SELECT * FROM category WHERE id = :id';
+
+        $this->dal->execute($sql, ['id' => $id]);
+        $data = $this->dal->fetchData('one');
+
+        if ($data === false) {
+            return null;
+        }
+
+        $category = new Category();
+        $this->hydrator->hydrate($category, $data);
+
+        return $category;
     }
 }
