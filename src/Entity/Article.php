@@ -2,14 +2,19 @@
 
 namespace App\Entity;
 
+use App\Validator\IsNotEmpty;
+
 class Article
 {
     private int $id;
 
+    #[IsNotEmpty(message: 'Le contenue est obligatoire')]
     private string $content;
 
+    #[IsNotEmpty(message: 'L\'éxtrait est obligatoire')]
     private string $excerpt;
 
+    #[IsNotEmpty(message: 'Le titre est obligatoire')]
     private string $title;
 
     private string $slug;
