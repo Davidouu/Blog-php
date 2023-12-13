@@ -4,6 +4,10 @@ namespace App;
 
 class helpers
 {
+    /*
+    * @param string $slug
+    * @return string
+    */
     public static function slugify(string $slug): string
     {
         $slug = strtolower($slug);
