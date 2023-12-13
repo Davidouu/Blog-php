@@ -11016,6 +11016,12 @@ nav.is-visible #Calque_1 .cls-2 {
   fill: #000;
 }
 
+/* Admin */
+
+.admin-padding {
+  padding-top: 100px !important;
+}
+
 /* Form */
 
 .small-test-error {

@@ -77,6 +77,27 @@ class Routes
                     'method' => 'logout',
                 ],
             ],
+
+            'admin' => [
+                'GET' => [
+                    'path' => '/admin',
+                    'controller' => 'AdminController',
+                    'method' => 'index',
+                ],
+            ],
+
+            'newArticle' => [
+                'GET' => [
+                    'path' => '/admin/article/nouveau',
+                    'controller' => 'ArticleController',
+                    'method' => 'newArticle',
+                ],
+                'POST' => [
+                    'path' => '/admin/article/nouveau',
+                    'controller' => 'ArticleController',
+                    'method' => 'newArticle',
+                ],
+            ],
         ];
     }
 }

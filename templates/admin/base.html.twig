@@ -21,7 +21,7 @@
 
 	<body>
 		<!-- Navigation-->
-		<nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
+		<nav class="navbar navbar-expand-lg navbar-light" id="mainNav" style="background-color: #f0e9df;">
 			<div class="container px-4 px-lg-5">
 				<a
 					class="navbar-brand" href="/">
@@ -36,7 +36,7 @@
 									fill: none;
 								}
 								.cls-3 {
-									fill: #f0e9df;
+									fill: #000;
 								}
 							</style>
 							<clipPath id="clippath">
@@ -56,92 +56,19 @@
 				<div class="collapse navbar-collapse" id="navbarResponsive">
 					<ul class="navbar-nav ms-auto py-4 py-lg-0">
 						<li class="nav-item">
-							<a class="nav-link px-lg-3 py-3 py-lg-4" href="/">Home</a>
+							<a class="nav-link px-lg-3 py-3 py-lg-4"  style="color: #000;" href="/">Home</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link px-lg-3 py-3 py-lg-4" href="/articles">Articles</a>
+							<a class="nav-link px-lg-3 py-3 py-lg-4" style="color: #000;" href="/admin/article/nouveau">Nouvel article</a>
 						</li>
-						<li class="nav-item">
-							<a class="nav-link px-lg-3 py-3 py-lg-4" href="/#contact">Contact</a>
-						</li>
-						{% if session.get('user') %}
-							{% if session.get('user').role == 'admin' or session.get('user').role == 'editor' %}
-							<li class="nav-item">
-								<a class="nav-link px-lg-3 py-3 py-lg-4" href="/admin">Administration</a>
-							</li>
-							{% else %}
-							<li class="nav-item">
-								<a class="nav-link px-lg-3 py-3 py-lg-4" href="/profil">profil</a>
-							</li>
-							{% endif %}
-						{% else %}
-						<li class="nav-item">
-							<a class="nav-link px-lg-3 py-3 py-lg-4" href="/inscription">Inscription / Connexion</a>
-						</li>
-						{% endif %}
-						
 					</ul>
 				</div>
 			</div>
 		</nav>
-		<!-- Page Header-->
-		<header class="masthead" style="background-image: url('/assets/img/home-bg.jpg')">
-			<div class="container position-relative px-4 px-lg-5">
-				<div class="row gx-4 gx-lg-5 justify-content-center">
-					<div class="col-md-10 col-lg-8 col-xl-7">
-						<div class="site-heading">
-							<h1>David Didnik</h1>
-							<span class="subheading">David Didnik, développeur rouennais d'application php symfony. Ce blog est développé en php natif, dans le cadre d'un projet de formation.
-							</span>
-						</div>
-					</div>
-				</div>
-			</div>
-		</header>
 
 		{% block content %}{% endblock %}
 
-		<!-- Footer-->
-		<footer class="border-top">
-			<div class="container px-4 px-lg-5">
-				<div class="row gx-4 gx-lg-5 justify-content-center">
-					<div class="col-md-10 col-lg-8 col-xl-7">
-						<div id="menu-footer">
-							<h3>Liens importants</h3>
-							<ul>
-								<li><a href="/">Home</a></li>
-								<li><a href="/articles">Articles</a></li>
-								<li><a href="#">Contact</a></li>
-								<li><a href="#">CV</a></li>
-								{% if session.get('user') and session.get('user').role == 'admin' or session.get('user').role == 'editor' %}
-								<li><a href="/admin">Administration</a></li>
-								{% endif %}
-							</ul>
-						</div>
-						<ul class="list-inline text-center">
-							<li class="list-inline-item">
-								<a href="https://www.linkedin.com/in/david-didnik/" target="_blank">
-									<span class="fa-stack fa-lg">
-										<i class="fas fa-circle fa-stack-2x"></i>
-										<i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
-									</span>
-								</a>
-							</li>
-							<li class="list-inline-item">
-								<a href="https://github.com/Davidouu" target="_blank">
-									<span class="fa-stack fa-lg">
-										<i class="fas fa-circle fa-stack-2x"></i>
-										<i class="fab fa-github fa-stack-1x fa-inverse"></i>
-									</span>
-								</a>
-							</li>
-						</ul>
-						<div class="small text-center text-muted fst-italic">Copyright &copy; David Didnik 2023</div>
-					</div>
-				</div>
-			</div>
-		</footer>
-		<!-- Bootstrap core JS-->
+		
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 		<!-- Core theme JS-->
 		<script src="assets/js/bootstrap.js"></script>

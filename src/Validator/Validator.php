@@ -18,7 +18,7 @@ class Validator
             foreach ($attributes as $attribute) {
                 $attrInstance = $attribute->newInstance();
 
-                if (! $attrInstance->validate($data[$property->getName()])) {
+                if (! $attrInstance->validate($data[$property->getName()] === null ? '' : $data[$property->getName()])) {
                     $errors[$property->getName()] = $attrInstance->getMessage();
                 }
             }

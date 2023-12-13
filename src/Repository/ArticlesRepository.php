@@ -20,7 +20,11 @@ class ArticlesRepository
         $this->hydrator = new Hydrator();
     }
 
-    // Get all articles
+    /*
+    * @param array|null $arrayOrder
+    * @param int|null $articlesLimit
+    * @return array
+    */
     public function getAllArticles(?array $arrayOrder, ?int $articlesLimit): array
     {
         $sql = 'SELECT * FROM article
@@ -58,7 +62,10 @@ class ArticlesRepository
         return $articles;
     }
 
-    // Get article by id
+    /*
+    * @param int $id
+    * @return array|null
+    */
     public function getArticleById(int $id): ?array
     {
         $sql = 'SELECT * FROM article
@@ -88,5 +95,27 @@ class ArticlesRepository
 
         return $data;
 
+    }
+
+    /*
+    * @param int $id
+    * @return bool
+    */
+    public function createArticle(Article $article): bool
+    {
+        $sql = 'INSERT INTO article (content, excerpt, title, slug, thumbnailUrl, categoryId, authorId, isValidated, promote)
+                VALUES (:content, :excerpt, :title, :slug, :thumbnailUrl, :categoryId, :authorId, :isValidated, :promote)';
+
+        return $this->dal->execute($sql, [
+            'content' => $article->getContent(),
+            'excerpt' => $article->getExcerpt(),
+            'title' => $article->getTitle(),
+            'slug' => $article->getSlug(),
+            'thumbnailUrl' => $article->getThumbnailUrl(),
+            'categoryId' => $article->getCategory()->getId(),
+            'authorId' => $article->getAuthor()->getId(),
+            'isValidated' => $article->getIsValidated() ? 1 : 0,
+            'promote' => $article->getPromote() ? 1 : 0,
+        ]);
     }
 }

@@ -18,7 +18,10 @@ class UserRepository
         $this->hydrator = new Hydrator();
     }
 
-    // Get one user by email
+    /*
+    * @param User $user
+    * @return bool|User
+    */
     public function getUserByEmail(User $user): bool|User
     {
         $sql = 'SELECT * FROM user WHERE email = :email';
@@ -36,7 +39,10 @@ class UserRepository
         return false;
     }
 
-    // Get one user by id
+    /*
+    * @param User $user
+    * @return bool|User
+    */
     public function getUserById(User $user): bool|User
     {
         $sql = 'SELECT * FROM user WHERE id = :id';
@@ -54,7 +60,10 @@ class UserRepository
         return false;
     }
 
-    // Add new user
+    /*
+    * @param User $user
+    * @return int
+    */
     public function addUser(User $user): int
     {
         $sql = 'INSERT INTO user (firstName, lastName, email, password, role, profilPictureUrl, confirmationToken) 
@@ -73,7 +82,10 @@ class UserRepository
         return $this->dal->getLastInsertId();
     }
 
-    // Update user
+    /*
+    * @param User $user
+    * @return bool
+    */
     public function updateUser(User $user): bool
     {
         $sql = 'UPDATE user 
@@ -95,7 +107,10 @@ class UserRepository
         ]);
     }
 
-    // Check if user is validate
+    /*
+    * @param User $user
+    * @return bool
+    */
     public function checkConfirmationAccount(User $user): bool
     {
         $sql = 'SELECT validateAt FROM user WHERE email = :email';
@@ -110,7 +125,10 @@ class UserRepository
         return true;
     }
 
-    // Get password hash
+    /*
+    * @param User $user
+    * @return bool|string
+    */
     public function getPasswordHash(User $user): bool|string
     {
         $sql = 'SELECT password FROM user WHERE email = :email';
@@ -120,6 +138,42 @@ class UserRepository
 
         if (! empty($data)) {
             return $data['password'];
+        }
+
+        return false;
+    }
+
+    /*
+    * @param User $user
+    * @return bool|string
+    */
+    public function getRole(User $user): bool|string
+    {
+        $sql = 'SELECT role FROM user WHERE email = :email';
+
+        $this->dal->execute($sql, ['email' => $user->getEmail()]);
+        $data = $this->dal->fetchData('one');
+
+        if (! empty($data)) {
+            return $data['role'];
+        }
+
+        return false;
+    }
+
+    /*
+    * @param User $user
+    * @return int|bool
+    */
+    public function getIdByMail(User $user): bool|int
+    {
+        $sql = 'SELECT id FROM user WHERE email = :email';
+
+        $this->dal->execute($sql, ['email' => $user->getEmail()]);
+        $data = $this->dal->fetchData('one');
+
+        if (! empty($data)) {
+            return $data['id'];
         }
 
         return false;
