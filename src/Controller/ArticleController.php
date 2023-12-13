@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Article;
+use App\FileUploader;
 use App\Helpers;
+use App\Http\File;
 use App\Http\Request;
 use App\Http\Session;
 use App\Hydrator;
@@ -22,13 +24,16 @@ class ArticleController extends AbstractController
 
     private Helpers $helpers;
 
-    public function __construct(Environment $twig, Request $request, Session $session)
+    private FileUploader $fileUploader;
+
+    public function __construct(Environment $twig, Request $request, Session $session, File $files)
     {
         $this->articlesRepository = new ArticlesRepository();
         $this->categoryRepository = new CategoryRepository();
         $this->hydrator = new Hydrator();
         $this->helpers = new Helpers();
-        parent::__construct($twig, $request, $session);
+        $this->fileUploader = new FileUploader(['png', 'jpeg', 'jpg']);
+        parent::__construct($twig, $request, $session, $files);
     }
 
     /*
@@ -57,13 +62,21 @@ class ArticleController extends AbstractController
         return $this->render('article.html.twig', ['article' => $article]);
     }
 
-    // New article
+    /*
+    * @return string
+    */
     public function newArticle()
     {
         if (! empty($this->request->getParams('POST'))) {
-            // Validate data
-
             $article = new Article();
+
+            $upload = $this->fileUploader->upload($this->files->get('thumbnail'));
+
+            if (is_array($upload)) {
+                return $this->render('admin/new.html.twig', ['errors' => $upload, 'post' => $this->request->getParams('POST'), 'categories' => $this->categoryRepository->getAllCategories()]);
+            }
+
+            $article->setThumbnailUrl($upload);
 
             $validator = new Validator();
             $errors = $validator->validate($article, $this->request->getParams('POST'));
@@ -75,10 +88,6 @@ class ArticleController extends AbstractController
             $article->setAuthor($this->session->get('user'));
             $article->setPromote(array_key_exists('promote', $this->request->getParams('POST')) ? true : false);
 
-            // Upload thumbnail
-
-            $article->setThumbnailUrl('/assets/img/article-test.jpg');
-
             $this->hydrator->hydrate($article, $this->request->getParams('POST'));
 
             $article->setSlug($this->helpers->slugify($article->getTitle()));
@@ -89,8 +98,6 @@ class ArticleController extends AbstractController
             } else {
                 $article->setCategory($this->categoryRepository->getCategoryById(1));
             }
-
-            // Set thumbnailUrl
 
             if (! $this->articlesRepository->createArticle($article)) {
                 return $this->render('admin/new.html.twig', ['message' => 'Une erreur est survenue lors de l\'ajout de l\'article !', 'categories' => $this->categoryRepository->getAllCategories()]);
