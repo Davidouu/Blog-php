@@ -2,6 +2,7 @@
 
 namespace App\Router;
 
+use App\Http\File;
 use App\Http\Request;
 use App\Http\Session;
 use Twig\Environment;
@@ -15,6 +16,7 @@ class Router
         private Environment $twig,
         private Request $request,
         private Session $session,
+        private File $files
     ) {
         $this->url = trim($url, '/');
     }
@@ -50,7 +52,8 @@ class Router
 
         foreach ($this->routes[$this->request->getMethod()] as $route) {
             if ($route->match($this->url)) {
-                return $route->call($this->twig, $this->request, $this->session);
+
+                return $route->call($this->twig, $this->request, $this->session, $this->files);
             }
         }
 
