@@ -2,3 +2,59 @@
 
 {% block title %}David Didnik - Administartion
 {% endblock %}
+
+{% block content %}
+<div class="container px-4 px-lg-5 admin-padding">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+        <div class="col-md-10 col-lg-8 col-xl-7">
+
+            <h2 class="heading">
+                Articles
+            </h2>
+
+            {% for article in articles %}
+
+				<!-- Post preview-->
+				<div class="post-preview" {% if article.isValidated == false %} style="border: 1px solid red; padding: 0px 32px" {% else %} {% endif %}>
+                    {% if article.isValidated == false %} 
+                        <p style="color: red; font-weight: bold; font-size: 20px">Cet article n'est pas encore validé</p>
+                    {% else %}
+                    {% endif %}
+					<a href="/article/{{article.id}}/{{article.slug}}">
+						<h2 class="post-title">{{ article.title }}</h2>
+						<h3 class="post-subtitle">{{ article.excerpt }}</h3>
+						<img src="/uploads/thumbnails/{{ article.thumbnailUrl }}" alt="{{ article.title }}" class="img-fluid">
+					</a>
+					<p class="post-meta">
+						Posté par
+						{{ article.author.firstName }} {{ article.author.lastName }}
+						le
+						{{ article.publishDate|date("d/m/Y") }}
+						| Catégorie : {{ article.category.name }}
+					</p>							
+				</div>
+				
+			
+				<!-- Divider-->
+				<hr class="my-4"/>
+
+			{% endfor %}
+
+            <h2 class="heading">
+                Catégories
+            </h2>
+
+            <ul>
+
+            {% for category in categories %}
+
+                <li>{{ category.name }}</li>
+
+            {% endfor %}
+
+            </ul>
+
+       </div>
+    </div>
+</div>
+{% endblock %}
