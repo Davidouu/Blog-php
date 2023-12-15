@@ -69,7 +69,7 @@ class ArticleController extends AbstractController
     /*
     * @return string
     */
-    public function newArticle()
+    public function newArticle(): string
     {
         if (! empty($this->request->getParams('POST'))) {
             $article = new Article();
@@ -114,7 +114,12 @@ class ArticleController extends AbstractController
         return $this->render('admin/new.html.twig', ['categories' => $this->categoryRepository->getAllCategories()]);
     }
 
-    public function editArticle(int $id, string $slug): string
+    /*
+    * @param int $id
+    * @param string $slug
+    * @return string
+    */
+    public function editArticle(int $id): string
     {
         $thisArticle = $this->articlesRepository->getArticleById($id);
 
@@ -166,5 +171,16 @@ class ArticleController extends AbstractController
         }
 
         return $this->render('admin/edit.html.twig', ['categories' => $this->categoryRepository->getAllCategories(), 'article' => $thisArticle, 'type' => 'modification']);
+    }
+
+    /*
+    * @param int $id
+    * @param string $slug
+    * @return void
+    */
+    public function deleteArticle(int $id): void
+    {
+        $this->articlesRepository->deleteArticle($id);
+        $this->redirect('/admin');
     }
 }
