@@ -141,4 +141,15 @@ class ArticlesRepository
             'id' => $article->getId(),
         ]);
     }
+
+    /*
+    * @param int $id
+    * @return bool
+    */
+    public function deleteArticle(int $id): bool
+    {
+        $sql = 'DELETE FROM article WHERE id = :id';
+
+        return $this->dal->execute($sql, ['id' => $id]);
+    }
 }
