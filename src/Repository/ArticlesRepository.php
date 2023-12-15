@@ -28,8 +28,8 @@ class ArticlesRepository
     public function getAllArticles(?array $arrayOrder, ?int $articlesLimit): array
     {
         $sql = 'SELECT * FROM article
-                INNER JOIN category ON article.categoryId = category.id 
-                INNER JOIN user ON article.authorId = user.id';
+                INNER JOIN category ON article.categoryId = category.categoryId 
+                INNER JOIN user ON article.authorId = user.userId';
 
         if (isset($arrayOrder)) {
             $sql .= ' ORDER BY '.$arrayOrder['column'].' '.$arrayOrder['order'];
@@ -69,8 +69,8 @@ class ArticlesRepository
     public function getArticleById(int $id): ?array
     {
         $sql = 'SELECT * FROM article
-                INNER JOIN category ON article.categoryId = category.id 
-                INNER JOIN user ON article.authorId = user.id
+                INNER JOIN category ON article.categoryId = category.categoryId 
+                INNER JOIN user ON article.authorId = user.userId
                 WHERE article.id = :id';
 
         $this->dal->execute($sql, ['id' => $id]);
@@ -98,7 +98,7 @@ class ArticlesRepository
     }
 
     /*
-    * @param int $id
+    * @param Article $article
     * @return bool
     */
     public function createArticle(Article $article): bool
@@ -112,10 +112,33 @@ class ArticlesRepository
             'title' => $article->getTitle(),
             'slug' => $article->getSlug(),
             'thumbnailUrl' => $article->getThumbnailUrl(),
-            'categoryId' => $article->getCategory()->getId(),
-            'authorId' => $article->getAuthor()->getId(),
+            'categoryId' => $article->getCategory()->getCategoryId(),
+            'authorId' => $article->getAuthor()->getUserId(),
             'isValidated' => $article->getIsValidated() ? 1 : 0,
             'promote' => $article->getPromote() ? 1 : 0,
+        ]);
+    }
+
+    /*
+    * @param Article $article
+    * @return bool
+    */
+    public function updateArticle(Article $article): bool
+    {
+        $sql = 'UPDATE article SET content = :content, excerpt = :excerpt, title = :title, slug = :slug, thumbnailUrl = :thumbnailUrl, categoryId = :categoryId, authorId = :authorId, isValidated = :isValidated, promote = :promote
+                WHERE id = :id';
+
+        return $this->dal->execute($sql, [
+            'content' => $article->getContent(),
+            'excerpt' => $article->getExcerpt(),
+            'title' => $article->getTitle(),
+            'slug' => $article->getSlug(),
+            'thumbnailUrl' => $article->getThumbnailUrl(),
+            'categoryId' => $article->getCategory()->getCategoryId(),
+            'authorId' => $article->getAuthor()->getUserId(),
+            'isValidated' => $article->getIsValidated() ? 1 : 0,
+            'promote' => $article->getPromote() ? 1 : 0,
+            'id' => $article->getId(),
         ]);
     }
 }
