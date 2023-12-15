@@ -2,7 +2,7 @@
 	<form id="new-article" action="" method="POST" enctype='multipart/form-data'>
 
 		<div class="form-floating">
-			<input class="form-control" id="title" type="text" name="title" required/>
+			<input class="form-control" id="title" type="text" name="title" value="{% if type == 'modification' %} {{article.title}} {% endif %}" required/>
 			<label for="title">Titre*</label>
 			{% if errors.title %}
 				<small class="small-test-error"></small>
@@ -10,7 +10,7 @@
 		</div>
 
         <div class="form-floating">
-			<input class="form-control" id="excerpt" type="text" name="excerpt"/ required>
+			<input class="form-control" id="excerpt" type="text" name="excerpt" value="{% if type == 'modification' %} {{article.excerpt}} {% endif %}" required>
 			<label for="excerpt">Extrait*</label>
 			{% if errors.excerpt %}
 				<small class="small-test-error">{{ errors.excerpt }}</small>
@@ -18,7 +18,7 @@
 		</div>
 
         <div class="form-floating">
-			<textarea class="form-control" id="content" type="text" name="content" cols="30" rows="8" required></textarea>
+			<textarea class="form-control" id="content" type="text" name="content" cols="30" rows="8" required>{% if type == 'modification' %} {{article.content}} {% endif %}</textarea>
 			<label for="content">Contenue*</label>
 			{% if errors.content %}
 				<small class="small-test-error">{{ errors.content }}</small>
@@ -26,8 +26,8 @@
 		</div>
 
         <div class="form-floating">
-			<input class="form-control" id="thumbnail" type="file" name="thumbnail" accept="image/*" required/>
-			<label for="thumbnail">Image de mise en avant</label>
+		<input class="form-control" id="thumbnail" type="file" name="thumbnail" accept="image/*" {% if type != 'modification'%} required {% endif %}/>
+		<label for="thumbnail">Image de mise en avant</label>
 			{% if errors.thumbnailUrl %}
 				<small class="small-test-error">{{ errors.thumbnailUrl }}</small>
 			{% endif %}
@@ -35,16 +35,16 @@
 
         <div class="form-floating mb-5">
             <select class="form-select" id="idCategory" name="idCategory">
-                <option value="" selected disabled>Choisir une catégorie</option>
+                <option value="" {% if type != 'modification'%} selected {% endif %} disabled>Choisir une catégorie</option>
                 {% for category in categories %}
-                    <option value="{{ category.idCategory }}">{{ category.name }}</option>
+                    <option {% if type == 'modification' and article.categoryId == category.categoryId %} selected {% endif %} value="{{ category.categoryId }}">{{ category.name }}</option>
                 {% endfor %}
             </select>
 			<label for="category">Catégorie*</label>
 		</div>
 
         <div class="form-check">
-            <input class="form-check-input" id="promote" type="checkbox" name="promote">
+            <input class="form-check-input" id="promote" type="checkbox" name="promote" {% if type == 'modification' and article.promote == true %} checked {% endif %}>
             <label for="promote">Mis en avant sur l'accueil</label>
         </div>
 

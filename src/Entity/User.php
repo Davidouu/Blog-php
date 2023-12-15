@@ -8,7 +8,7 @@ use App\Validator\IsValidPassword;
 
 class User
 {
-    private int $id;
+    private int $userId;
 
     #[IsNotEmpty(message: 'Le prénom est obligatoire')]
     private string $firstName;
@@ -36,9 +36,9 @@ class User
     }
 
     // Setters
-    public function setId(int $id): self
+    public function setUserId(int $id): self
     {
-        $this->id = $id;
+        $this->userId = $id;
 
         return $this;
     }
@@ -100,9 +100,9 @@ class User
     }
 
     // Getters
-    public function getId(): int
+    public function getUserId(): int
     {
-        return $this->id;
+        return $this->userId;
     }
 
     public function getFirstName(): string

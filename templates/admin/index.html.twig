@@ -20,7 +20,16 @@
                         <p style="color: red; font-weight: bold; font-size: 20px">Cet article n'est pas encore validé</p>
                     {% else %}
                     {% endif %}
-					<a href="/article/{{article.id}}/{{article.slug}}">
+                    {% if article.author.id == session.get('user').id or session.get('user').role == 'admin' %}
+                        <a href="/admin/article/{{article.id}}/edit">
+                            <button class="btn btn-primary" style="float: right; margin-bottom: 10px">Modifier</button>
+                        </a>
+                        <a href="/admin/article/{{article.id}}/delete"
+                            <button class="btn btn-danger" style="float: right; margin-bottom: 10px; margin-right: 10px">Supprimer</button>
+                        </a>
+                    {% else %}
+                    {% endif %}
+                    <a href="/article/{{article.id}}/{{article.slug}}">
 						<h2 class="post-title">{{ article.title }}</h2>
 						<h3 class="post-subtitle">{{ article.excerpt }}</h3>
 						<img src="/uploads/thumbnails/{{ article.thumbnailUrl }}" alt="{{ article.title }}" class="img-fluid">

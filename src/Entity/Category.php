@@ -4,16 +4,16 @@ namespace App\Entity;
 
 class category
 {
-    private int $id;
+    private int $categoryId;
 
     private string $name;
 
     private string $categorySlug;
 
     // Setters
-    public function setId(int $id): self
+    public function setCategoryId(int $categoryId): self
     {
-        $this->id = $id;
+        $this->categoryId = $categoryId;
 
         return $this;
     }
@@ -33,9 +33,9 @@ class category
     }
 
     // Getters
-    public function getId(): ?int
+    public function getCategoryId(): ?int
     {
-        return $this->id;
+        return $this->categoryId;
     }
 
     public function getName(): string
