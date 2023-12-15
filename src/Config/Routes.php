@@ -101,14 +101,22 @@ class Routes
 
             'editArticle' => [
                 'GET' => [
-                    'path' => '/admin/article/:id-:slug',
+                    'path' => '/admin/article/:id/edit',
                     'controller' => 'ArticleController',
                     'method' => 'editArticle',
                 ],
                 'POST' => [
-                    'path' => '/admin/article/:id-:slug',
+                    'path' => '/admin/article/:id-:slug/edit',
                     'controller' => 'ArticleController',
                     'method' => 'editArticle',
+                ],
+            ],
+
+            'deleteArticle' => [
+                'GET' => [
+                    'path' => '/admin/article/:id/delete',
+                    'controller' => 'ArticleController',
+                    'method' => 'deleteArticle',
                 ],
             ],
         ];
