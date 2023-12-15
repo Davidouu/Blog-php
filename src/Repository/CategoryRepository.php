@@ -44,7 +44,7 @@ class CategoryRepository
     */
     public function getCategoryById(int $id)
     {
-        $sql = 'SELECT * FROM category WHERE id = :id';
+        $sql = 'SELECT * FROM category WHERE categoryId = :id';
 
         $this->dal->execute($sql, ['id' => $id]);
         $data = $this->dal->fetchData('one');

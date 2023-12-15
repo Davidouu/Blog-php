@@ -43,11 +43,11 @@ class UserRepository
     * @param User $user
     * @return bool|User
     */
-    public function getUserById(User $user): bool|User
+    public function getUserById(int $user): bool|User
     {
-        $sql = 'SELECT * FROM user WHERE id = :id';
+        $sql = 'SELECT * FROM user WHERE userId = :id';
 
-        $this->dal->execute($sql, ['id' => $user->getId()]);
+        $this->dal->execute($sql, ['id' => $user]);
         $data = $this->dal->fetchData('one');
 
         if (! empty($data)) {
