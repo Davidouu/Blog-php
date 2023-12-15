@@ -98,6 +98,19 @@ class Routes
                     'method' => 'newArticle',
                 ],
             ],
+
+            'editArticle' => [
+                'GET' => [
+                    'path' => '/admin/article/:id-:slug',
+                    'controller' => 'ArticleController',
+                    'method' => 'editArticle',
+                ],
+                'POST' => [
+                    'path' => '/admin/article/:id-:slug',
+                    'controller' => 'ArticleController',
+                    'method' => 'editArticle',
+                ],
+            ],
         ];
     }
 }
