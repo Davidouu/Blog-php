@@ -19,6 +19,13 @@
                     <img src="/{{ article.thumbnailUrl }}" alt="{{ article.title }}" class="img-fluid">
                     <p>{{ article.content }}</p>
                 </article>
+
+				{% include 'message.html.twig' %}
+
+				{% if session.get('user') %}
+					{{ include('_formComment.html.twig', {'button_label': 'Commenter'}) }}
+				{% endif %}
+
 			</div>
 		</div>
 	</div>
