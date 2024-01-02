@@ -169,6 +169,14 @@ class Routes
                     'method' => 'deleteCategory',
                 ],
             ],
+
+            'postComment' => [
+                'POST' => [
+                    'path' => '/article/:id/:slug',
+                    'controller' => 'CommentController',
+                    'method' => 'postComment',
+                ],
+            ],
         ];
     }
 }
