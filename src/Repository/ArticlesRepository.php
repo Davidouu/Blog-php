@@ -66,7 +66,7 @@ class ArticlesRepository
     * @param int $id
     * @return array|null
     */
-    public function getArticleById(int $id): ?array
+    public function getArticleById(int $id): ?Article
     {
         $sql = 'SELECT * FROM article
                 INNER JOIN category ON article.categoryId = category.categoryId 
@@ -93,7 +93,7 @@ class ArticlesRepository
         $articleObject = new Article();
         $this->hydrator->hydrate($articleObject, $data);
 
-        return $data;
+        return $articleObject;
 
     }
 
