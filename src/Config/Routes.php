@@ -106,7 +106,7 @@ class Routes
                     'method' => 'editArticle',
                 ],
                 'POST' => [
-                    'path' => '/admin/article/:id-:slug/edit',
+                    'path' => '/admin/article/:id/edit',
                     'controller' => 'ArticleController',
                     'method' => 'editArticle',
                 ],
@@ -117,6 +117,22 @@ class Routes
                     'path' => '/admin/article/:id/delete',
                     'controller' => 'ArticleController',
                     'method' => 'deleteArticle',
+                ],
+            ],
+
+            'validetaArticle' => [
+                'GET' => [
+                    'path' => '/admin/article/:id/validate',
+                    'controller' => 'ArticleController',
+                    'method' => 'validetaArticle',
+                ],
+            ],
+
+            'unvalidetaArticle' => [
+                'GET' => [
+                    'path' => '/admin/article/:id/unvalidate',
+                    'controller' => 'ArticleController',
+                    'method' => 'unvalidetaArticle',
                 ],
             ],
         ];

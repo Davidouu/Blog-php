@@ -16,19 +16,27 @@
 
 				<!-- Post preview-->
 				<div class="post-preview" {% if article.isValidated == false %} style="border: 1px solid red; padding: 0px 32px" {% else %} {% endif %}>
+                    <div style="width: 100%;">
                     {% if article.isValidated == false %} 
                         <p style="color: red; font-weight: bold; font-size: 20px">Cet article n'est pas encore validé</p>
+                        <a href="/admin/article/{{article.id}}/validate">
+                            <button class="btn btn-success" style="margin-bottom: 10px; margin-right: 10px">Valider</button>
+                        </a>
                     {% else %}
+                        <a href="/admin/article/{{article.id}}/unvalidate">
+                            <button class="btn btn-danger" style="margin-bottom: 10px; margin-right: 10px">Dévalider</button>
+                        </a>
                     {% endif %}
                     {% if article.author.id == session.get('user').id or session.get('user').role == 'admin' %}
                         <a href="/admin/article/{{article.id}}/edit">
-                            <button class="btn btn-primary" style="float: right; margin-bottom: 10px">Modifier</button>
+                            <button class="btn btn-primary" style="margin-bottom: 10px; margin-right: 10px">Modifier</button>
                         </a>
                         <a href="/admin/article/{{article.id}}/delete"
-                            <button class="btn btn-danger" style="float: right; margin-bottom: 10px; margin-right: 10px">Supprimer</button>
+                            <button class="btn btn-danger" style="margin-bottom: 10px; margin-right: 10px">Supprimer</button>
                         </a>
                     {% else %}
                     {% endif %}
+                    </div>
                     <a href="/article/{{article.id}}/{{article.slug}}">
 						<h2 class="post-title">{{ article.title }}</h2>
 						<h3 class="post-subtitle">{{ article.excerpt }}</h3>

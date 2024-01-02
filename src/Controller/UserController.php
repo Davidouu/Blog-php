@@ -52,7 +52,7 @@ class UserController extends AbstractController
             $userId = $this->UserRepository->addUser($user);
 
             if ($userId) {
-                $user->setId($userId);
+                $user->setUserId($userId);
 
                 mail(
                     $user->getEmail(),
@@ -72,10 +72,10 @@ class UserController extends AbstractController
     public function confirmationAccount(string $id, string $token): ?string
     {
         $user = new User();
-        $user->setId((int) $id);
+        $user->setUserId((int) $id);
         $user->setConfirmationToken($token);
 
-        $user = $this->UserRepository->getUserById($user);
+        $user = $this->UserRepository->getUserById($user->getUserId());
 
         if ($user) {
             $user->setConfirmationToken(null);
@@ -105,7 +105,7 @@ class UserController extends AbstractController
         $user->setEmail($this->request->getParam('POST', 'email'));
         $user->setPassword($this->request->getParam('POST', 'password'));
         $user->setRole($this->UserRepository->getRole($user));
-        $user->setId($this->UserRepository->getIdByMail($user));
+        $user->setUserId($this->UserRepository->getIdByMail($user));
 
         // Si aucun utilisateur n'est trouvé avec l'email saisi on redirige vers la page de connexion
         if (! $this->UserRepository->getUserByEmail($user->setEmail($this->request->getParam('POST', 'email')))) {
