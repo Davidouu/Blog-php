@@ -92,7 +92,7 @@ class UserRepository
                 SET firstName = :firstName, lastName = :lastName, email = :email, 
                 password = :password, role = :role, profilPictureUrl = :profilPictureUrl, 
                 confirmationToken = :confirmationToken, validateAt = :validateAt 
-                WHERE id = :id';
+                WHERE userId = :id';
 
         return $this->dal->execute($sql, [
             'firstName' => $user->getFirstname(),
@@ -103,7 +103,7 @@ class UserRepository
             'profilPictureUrl' => $user->getProfilPictureUrl(),
             'confirmationToken' => $user->getConfirmationToken(),
             'validateAt' => $user->getValidateAt()->format('Y-m-d H:i:s'),
-            'id' => $user->getId(),
+            'id' => $user->getUserId(),
         ]);
     }
 
@@ -167,13 +167,13 @@ class UserRepository
     */
     public function getIdByMail(User $user): bool|int
     {
-        $sql = 'SELECT id FROM user WHERE email = :email';
+        $sql = 'SELECT userId FROM user WHERE email = :email';
 
         $this->dal->execute($sql, ['email' => $user->getEmail()]);
         $data = $this->dal->fetchData('one');
 
         if (! empty($data)) {
-            return $data['id'];
+            return $data['userId'];
         }
 
         return false;
