@@ -152,4 +152,26 @@ class ArticlesRepository
 
         return $this->dal->execute($sql, ['id' => $id]);
     }
+
+    /*
+    * @param int $id
+    * @return bool
+    */
+    public function validateArticle(int $id): bool
+    {
+        $sql = 'UPDATE article SET isValidated = 1 WHERE id = :id';
+
+        return $this->dal->execute($sql, ['id' => $id]);
+    }
+
+    /*
+    * @param int $id
+    * @return bool
+    */
+    public function unvalidateArticle(int $id): bool
+    {
+        $sql = 'UPDATE article SET isValidated = 0 WHERE id = :id';
+
+        return $this->dal->execute($sql, ['id' => $id]);
+    }
 }

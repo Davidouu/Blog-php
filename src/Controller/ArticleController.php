@@ -175,12 +175,31 @@ class ArticleController extends AbstractController
 
     /*
     * @param int $id
-    * @param string $slug
     * @return void
     */
     public function deleteArticle(int $id): void
     {
         $this->articlesRepository->deleteArticle($id);
+        $this->redirect('/admin');
+    }
+
+    /*
+    * @param int $id
+    * @return void
+    */
+    public function validetaArticle(int $id): void
+    {
+        $this->articlesRepository->validateArticle($id);
+        $this->redirect('/admin');
+    }
+
+    /*
+    * @param int $id
+    * @return void
+    */
+    public function unvalidetaArticle(int $id): void
+    {
+        $this->articlesRepository->unvalidateArticle($id);
         $this->redirect('/admin');
     }
 }
