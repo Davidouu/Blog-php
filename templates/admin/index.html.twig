@@ -57,6 +57,8 @@
 
 			{% endfor %}
 
+            {% if session.get('user').role == 'admin' %}
+
             <h2 class="heading">
                 Catégories
             </h2>
@@ -65,11 +67,13 @@
 
             {% for category in categories %}
 
-                <li>{{ category.name }}</li>
+                <li><a href="/admin/categorie/{{ category.categoryId }}/edit">{{ category.name }}</a></li>
 
             {% endfor %}
 
             </ul>
+
+            {% endif %}
 
        </div>
     </div>

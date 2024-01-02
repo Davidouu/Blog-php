@@ -2,10 +2,13 @@
 
 namespace App\Entity;
 
+use App\Validator\IsNotEmpty;
+
 class category
 {
     private int $categoryId;
 
+    #[IsNotEmpty(message: 'Le contenue est obligatoire')]
     private string $name;
 
     private string $categorySlug;

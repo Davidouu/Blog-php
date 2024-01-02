@@ -135,6 +135,40 @@ class Routes
                     'method' => 'unvalidetaArticle',
                 ],
             ],
+
+            'newCategory' => [
+                'GET' => [
+                    'path' => '/admin/categorie/new',
+                    'controller' => 'CategoryController',
+                    'method' => 'newCategory',
+                ],
+                'POST' => [
+                    'path' => '/admin/categorie/new',
+                    'controller' => 'CategoryController',
+                    'method' => 'newCategory',
+                ],
+            ],
+
+            'editCategory' => [
+                'GET' => [
+                    'path' => '/admin/categorie/:id/edit',
+                    'controller' => 'CategoryController',
+                    'method' => 'editCategory',
+                ],
+                'POST' => [
+                    'path' => '/admin/categorie/:id/edit',
+                    'controller' => 'CategoryController',
+                    'method' => 'editCategory',
+                ],
+            ],
+
+            'deleteCategory' => [
+                'GET' => [
+                    'path' => '/admin/categorie/:id/delete',
+                    'controller' => 'CategoryController',
+                    'method' => 'deleteCategory',
+                ],
+            ],
         ];
     }
 }

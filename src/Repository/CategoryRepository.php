@@ -58,4 +58,45 @@ class CategoryRepository
 
         return $category;
     }
+
+    /*
+    * @param Category $category
+    * @return bool
+    */
+    public function newCategory(Category $category)
+    {
+        $sql = 'INSERT INTO category (name, categorySlug) VALUES (:name, :categorySlug)';
+
+        $this->dal->execute($sql, ['name' => $category->getName(), 'categorySlug' => $category->getCategorySlug()]);
+
+        return true;
+    }
+
+    /*
+    * @param Category $category
+    * @return bool
+    */
+    public function editCategory(Category $category)
+    {
+        $sql = 'UPDATE category SET name = :name, categorySlug = :categorySlug WHERE categoryId = :id';
+
+        $this->dal->execute($sql, ['name' => $category->getName(), 'categorySlug' => $category->getCategorySlug(), 'id' => $category->getCategoryId()]);
+
+        return true;
+    }
+
+    /*
+    * @param int $id
+    * @return bool
+    */
+    public function deleteCategory(int $id)
+    {
+        $sql = 'DELETE FROM category WHERE categoryId = :id';
+
+        if (! $this->dal->execute($sql, ['id' => $id])) {
+            return false;
+        }
+
+        return true;
+    }
 }
