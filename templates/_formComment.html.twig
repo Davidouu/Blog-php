@@ -2,9 +2,9 @@
 	<form id="new-article" action="" method="POST" enctype='multipart/form-data'>
 
     <div class="form-floating">
-        <textarea class="form-control" id="content" type="text" name="content" cols="30" rows="8" required>{% if type == 'modification' %} {{comment.content}} {% endif %}</textarea>
-        <label for="content">Commentaire*</label>
-        {% if errors.content %}
+        <textarea class="form-control" id="commentContent" type="text" name="commentContent" cols="30" rows="8" required>{% if type == 'modification' %} {{comment.commentContent}} {% endif %}</textarea>
+        <label for="commentContent">Commentaire*</label>
+        {% if errors.commentContent %}
             <small class="small-test-error">{{ errors.content }}</small>
         {% endif %}
     </div>

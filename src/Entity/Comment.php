@@ -6,10 +6,10 @@ use App\Validator\IsNotEmpty;
 
 class Comment
 {
-    private int $id;
+    private int $commentId;
 
     #[IsNotEmpty(message: 'Le contenue est obligatoire')]
-    private string $content;
+    private string $commentContent;
 
     private \DateTime $publishDate;
 
@@ -21,16 +21,16 @@ class Comment
 
     // Setters
 
-    public function setId(int $id): self
+    public function setCommentId(int $id): self
     {
-        $this->id = $id;
+        $this->commentId = $id;
 
         return $this;
     }
 
-    public function setContent(string $content): self
+    public function setCommentContent(string $content): self
     {
-        $this->content = $content;
+        $this->commentContent = $content;
 
         return $this;
     }
@@ -42,7 +42,7 @@ class Comment
         return $this;
     }
 
-    public function setIsValidated(bool $isValidated): self
+    public function setIsCommentValidated(bool $isValidated): self
     {
         $this->isValidated = $isValidated;
 
@@ -65,14 +65,14 @@ class Comment
 
     // Getters
 
-    public function getId(): int
+    public function getCommentId(): int
     {
-        return $this->id;
+        return $this->commentId;
     }
 
-    public function getContent(): string
+    public function getCommentContent(): string
     {
-        return $this->content;
+        return $this->commentContent;
     }
 
     public function getPublishDate(): \DateTime
@@ -80,7 +80,7 @@ class Comment
         return $this->publishDate;
     }
 
-    public function getIsValidated(): bool
+    public function getIsCommentValidated(): bool
     {
         return $this->isValidated;
     }

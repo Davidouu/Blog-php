@@ -177,6 +177,22 @@ class Routes
                     'method' => 'postComment',
                 ],
             ],
+
+            'validateComment' => [
+                'GET' => [
+                    'path' => '/admin/comment/:id/validate',
+                    'controller' => 'CommentController',
+                    'method' => 'validateComment',
+                ],
+            ],
+
+            'deleteComment' => [
+                'GET' => [
+                    'path' => '/admin/comment/:id/delete',
+                    'controller' => 'CommentController',
+                    'method' => 'deleteComment',
+                ],
+            ],
         ];
     }
 }
