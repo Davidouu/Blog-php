@@ -33,7 +33,12 @@ class CommentController extends AbstractController
         parent::__construct($twig, $request, $session, $files);
     }
 
-    public function postComment(int $id, string $slug)
+    /**
+     * @param int $id
+     * @param string $slug
+     * @return string
+     */
+    public function postComment(int $id, string $slug): string
     {
         $article = $this->articlesRepository->getArticleById($id);
 
@@ -42,17 +47,17 @@ class CommentController extends AbstractController
 
             $validator = new Validator();
             $errors = $validator->validate($comment, $this->request->getParams('POST'));
-
+            
             if (count($errors) > 0) {
                 return $this->render('article.html.twig', ['errors' => $errors, 'article' => $article]);
             }
-
+            
             $this->hydrator->hydrate($comment, $this->request->getParams('POST'));
-
+            
             $comment->setAuthor($this->session->get('user'));
             $comment->setArticle($article);
-            $comment->setIsValidated(false);
-
+            $comment->setIsCommentValidated(false);
+            
             if (!$this->commentRepository->addComment($comment)) {
                 return $this->render('article.html.twig', ['message' => 'Il y a eu une erreur lors de la création du commenatire', 'article' => $article]);
             }
@@ -61,5 +66,42 @@ class CommentController extends AbstractController
         }
 
         $this->redirect('/article/' . $id . '/' . $slug, ['article' => $article]);
+    }
+
+    /**
+     * @param int $id
+     * @return void
+     */
+    public function validateComment(int $id): void
+    {
+        $comment = $this->commentRepository->getCommentById($id);
+
+        
+        if ($comment->getIsCommentValidated()) {
+            $this->redirect('/admin', ['message' => 'Ce commentaire a déjà été validé']);
+        }
+        
+        $comment->setIsCommentValidated(true);
+
+        if (!$this->commentRepository->updateComment($comment)) {
+            $this->redirect('/admin', ['message' => 'Il y a eu une erreur lors de la validation du commentaire']);
+        }
+
+        $this->redirect('/admin', ['message' => 'Le commentaire a bien été validé']);
+    }
+
+    /**
+     * @param int $id
+     * @return void
+     */
+    public function deleteComment(int $id): void
+    {
+        $comment = $this->commentRepository->getCommentById($id);
+
+        if (!$this->commentRepository->deleteComment($comment)) {
+            $this->redirect('/admin', ['message' => 'Il y a eu une erreur lors de la suppression du commentaire']);
+        }
+
+        $this->redirect('/admin', ['message' => 'Le commentaire a bien été supprimé']);
     }
 }
