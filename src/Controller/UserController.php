@@ -25,7 +25,10 @@ class UserController extends AbstractController
         parent::__construct($twig, $request, $session, $files);
     }
 
-    // Register new user
+    /*
+    * Register user
+    * @return string
+    */
     public function register(): string
     {
 
@@ -57,7 +60,7 @@ class UserController extends AbstractController
                 mail(
                     $user->getEmail(),
                     'Confirmation de votre compte',
-                    "Pour confirmer cotre compte, veuillez cliquer sur le lien suivant.\n{$_SERVER['REQUEST_SCHEME']}://{$_SERVER['HTTP_HOST']}/confirmation-compte/$userId-$token"
+                    "Pour confirmer cotre compte, veuillez cliquer sur le lien suivant.\n{$_SERVER['REQUEST_SCHEME']}://{$_SERVER['HTTP_HOST']}/confirmation-compte/$userId/$token"
                 );
 
                 return $this->render('register.html.twig', ['message' => 'Un mail de confirmation a été envoyé '.$user->getEmail().' !']);
@@ -68,7 +71,12 @@ class UserController extends AbstractController
         return $this->render('register.html.twig');
     }
 
-    // Confirm user account
+    /*
+    * Confirmation account
+    * @param string $id
+    * @param string $token
+    * @return string|null
+    */
     public function confirmationAccount(string $id, string $token): ?string
     {
         $user = new User();
@@ -89,7 +97,10 @@ class UserController extends AbstractController
         return $this->render('register.html.twig', ['message' => 'Votre compte n\'a pas pu être confirmé !']);
     }
 
-    // Login user
+    /*
+    * Login user
+    * @return string
+    */
     public function login(): string
     {
         // If connected redirect to index
@@ -100,17 +111,19 @@ class UserController extends AbstractController
         if (empty($this->request->getParams('POST'))) {
             return $this->render('connexion.html.twig');
         }
-
+        
         $user = new User();
         $user->setEmail($this->request->getParam('POST', 'email'));
         $user->setPassword($this->request->getParam('POST', 'password'));
-        $user->setRole($this->UserRepository->getRole($user));
-        $user->setUserId($this->UserRepository->getIdByMail($user));
 
         // Si aucun utilisateur n'est trouvé avec l'email saisi on redirige vers la page de connexion
         if (! $this->UserRepository->getUserByEmail($user->setEmail($this->request->getParam('POST', 'email')))) {
             return $this->render('connexion.html.twig', ['message' => 'Aucun compte n\'est associé à cette adresse mail !']);
         }
+
+        $user->setRole($this->UserRepository->getRole($user));
+        $user->setUserId($this->UserRepository->getIdByMail($user));
+
 
         // Si l'utilisateur n'a pas confirmé son compte on redirige vers la page de connexion
         if (! $this->UserRepository->checkConfirmationAccount($user)) {
@@ -125,10 +138,50 @@ class UserController extends AbstractController
         return $this->render('connexion.html.twig', ['message' => 'Le mot de passe est incorrect !']);
     }
 
-    // Logout user
+    /*
+    * Logout user
+    * @return void
+    */
     public function logout(): void
     {
         $this->session->delete('user');
         $this->redirect('/');
+    }
+
+    /*
+    * Profil page
+    * @return string
+    */
+    public function profilPage(): string
+    {
+        if ($this->session->get('user') === null) {
+            $this->redirect('/connexion');
+        }
+
+        $user = $this->session->get('user');
+
+        $userData = $this->UserRepository->getUserById($user->getUserId());
+
+        if (! empty($this->request->getParams('POST'))) {
+            // L'utilisateur veur modifier son mot de passe
+            if ($this->request->getParam('POST', 'password') !== $this->request->getParam('POST', 'passwordConfirm')) {
+                return $this->render('profil.html.twig', ['message' => 'Les mots de passe ne correspondent pas !', 'user' => $userData]);
+            }
+
+            $validator = new Validator();
+            $errors = $validator->validate($userData, $this->request->getParams('POST'));
+
+            if (count($errors) > 0) {
+                return $this->render('profil.html.twig', ['errors' => $errors, 'post' => $this->request->getParams('POST'), 'user' => $userData]);
+            }
+
+            $userData->setPassword(password_hash($this->request->getParam('POST', 'password'), PASSWORD_DEFAULT));
+
+            $this->UserRepository->updateUser($userData);
+
+            return $this->render('profil.html.twig', ['message' => 'Votre mot de passe a bien été modifié !', 'user' => $userData]);
+        }
+
+        return $this->render('profil.html.twig', ['user' => $userData]);
     }
 }

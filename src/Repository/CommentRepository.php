@@ -54,6 +54,11 @@ class CommentRepository
         $this->dal->execute($sql);
         $data = $this->dal->fetchData('all');
 
+        // If no data
+        if (empty($data)) {
+            return $data;
+        }
+
         foreach ($data as &$comment) {
             $article = new Article();
             $this->hydrator->hydrate($article, $comment);

@@ -24,15 +24,12 @@ class User
 
     private string $role;
 
-    private string $profilPictureUrl;
-
     private ?string $confirmationToken;
 
     private \DateTime $validateAt;
 
     public function __construct()
     {
-        $this->profilPictureUrl = 'images/user-placeholder.jpg';
     }
 
     // Setters
@@ -74,13 +71,6 @@ class User
     public function setRole(string $role): self
     {
         $this->role = strtolower($role);
-
-        return $this;
-    }
-
-    public function setProfilPictureUrl(string $profilPictureUrl): self
-    {
-        $this->profilPictureUrl = $profilPictureUrl;
 
         return $this;
     }
@@ -128,11 +118,6 @@ class User
     public function getRole(): ?string
     {
         return $this->role;
-    }
-
-    public function getProfilPictureUrl(): ?string
-    {
-        return $this->profilPictureUrl;
     }
 
     public function getConfirmationToken(): ?string

@@ -74,6 +74,12 @@
 								<a class="nav-link px-lg-3 py-3 py-lg-4" href="/profil">profil</a>
 							</li>
 							{% endif %}
+							<li class="nav-item">
+								<a class="nav-link px-lg-3 py-3 py-lg-4" href="/deconnexion">Déconnexion</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link px-lg-3 py-3 py-lg-4" href="/profil">Profil</a>
+							</li>
 						{% else %}
 						<li class="nav-item">
 							<a class="nav-link px-lg-3 py-3 py-lg-4" href="/inscription">Inscription / Connexion</a>
@@ -85,19 +91,7 @@
 			</div>
 		</nav>
 		<!-- Page Header-->
-		<header class="masthead" style="background-image: url('/assets/img/home-bg.jpg')">
-			<div class="container position-relative px-4 px-lg-5">
-				<div class="row gx-4 gx-lg-5 justify-content-center">
-					<div class="col-md-10 col-lg-8 col-xl-7">
-						<div class="site-heading">
-							<h1>David Didnik</h1>
-							<span class="subheading">David Didnik, développeur rouennais d'application php symfony. Ce blog est développé en php natif, dans le cadre d'un projet de formation.
-							</span>
-						</div>
-					</div>
-				</div>
-			</div>
-		</header>
+		
 
 		{% block content %}{% endblock %}
 

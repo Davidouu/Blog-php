@@ -2,7 +2,7 @@
 	<form id="new-article" action="" method="POST" enctype='multipart/form-data'>
 
 		<div class="form-floating">
-			<input class="form-control" id="title" type="text" name="title" value="{% if type == 'modification' %} {{article.title}} {% endif %}" required/>
+			<input class="form-control" id="title" type="text" name="title" value="{% if type == 'modification' %}{{article.title}}{% endif %}" required/>
 			<label for="title">Titre*</label>
 			{% if errors.title %}
 				<small class="small-test-error"></small>
@@ -10,7 +10,7 @@
 		</div>
 
         <div class="form-floating">
-			<input class="form-control" id="excerpt" type="text" name="excerpt" value="{% if type == 'modification' %} {{article.excerpt}} {% endif %}" required>
+			<input class="form-control" id="excerpt" type="text" name="excerpt" value="{% if type == 'modification' %}{{article.excerpt}}{% endif %}" required>
 			<label for="excerpt">Extrait*</label>
 			{% if errors.excerpt %}
 				<small class="small-test-error">{{ errors.excerpt }}</small>
@@ -18,7 +18,7 @@
 		</div>
 
         <div class="form-floating">
-			<textarea class="form-control" id="content" type="text" name="content" cols="30" rows="8" required>{% if type == 'modification' %} {{article.content}} {% endif %}</textarea>
+			<textarea class="form-control" id="content" type="text" name="content" cols="30" rows="8" required>{% if type == 'modification' %}{{article.content}}{% endif %}</textarea>
 			<label for="content">Contenue*</label>
 			{% if errors.content %}
 				<small class="small-test-error">{{ errors.content }}</small>

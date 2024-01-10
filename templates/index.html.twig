@@ -3,7 +3,9 @@
 {% block title %}David Didnik
 {% endblock %}
 
+
 {% block content %}
+{{ include('_banner.html.twig', {'title': 'David Didnik', 'text': 'David Didnik, développeur rouennais d\'application php symfony. Ce blog est développé en php natif, dans le cadre d\'un projet de formation.'}) }}
 	<div class="container px-4 px-lg-5">
 		<div class="row gx-4 gx-lg-5 justify-content-center">
 			<div class="col-md-10 col-lg-8 col-xl-7">
@@ -17,13 +19,13 @@
 					<a href="/article/{{article.id}}/{{article.slug}}">
 						<h2 class="post-title">{{ article.title }}</h2>
 						<h3 class="post-subtitle">{{ article.excerpt }}</h3>
-						<img src="{{ article.thumbnailUrl }}" alt="{{ article.title }}" class="img-fluid">
+						<img src="/uploads/thumbnails/{{ article.thumbnailUrl }}" alt="{{ article.title }}" class="img-fluid">
 					</a>
 					<p class="post-meta">
 						Posté par
 						{{ article.author.firstName }} {{ article.author.lastName }}
 						le
-						{{ article.publishDate|date("d/m/Y") }}
+						{{ article.updateDate|date("d/m/Y") }}
 						| Catégorie : {{ article.category.name }}
 					</p>							
 				</div>

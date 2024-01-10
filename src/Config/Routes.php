@@ -51,7 +51,7 @@ class Routes
 
             'confirmationAccount' => [
                 'GET' => [
-                    'path' => '/confirmation-compte/:id-:token',
+                    'path' => '/confirmation-compte/:id/:token',
                     'controller' => 'UserController',
                     'method' => 'confirmationAccount',
                 ],
@@ -75,6 +75,19 @@ class Routes
                     'path' => '/deconnexion',
                     'controller' => 'UserController',
                     'method' => 'logout',
+                ],
+            ],
+
+            'profilPage' => [
+                'GET' => [
+                    'path' => '/profil',
+                    'controller' => 'UserController',
+                    'method' => 'profilPage',
+                ],
+                'POST' => [
+                    'path' => '/profil',
+                    'controller' => 'UserController',
+                    'method' => 'profilPage',
                 ],
             ],
 
