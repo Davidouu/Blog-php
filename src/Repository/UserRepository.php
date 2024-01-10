@@ -75,7 +75,6 @@ class UserRepository
             'email' => $user->getEmail(),
             'password' => $user->getPassword(),
             'role' => $user->getRole(),
-            'profilPictureUrl' => $user->getProfilPictureUrl(),
             'confirmationToken' => $user->getConfirmationToken(),
         ]);
 
@@ -90,8 +89,8 @@ class UserRepository
     {
         $sql = 'UPDATE user 
                 SET firstName = :firstName, lastName = :lastName, email = :email, 
-                password = :password, role = :role, profilPictureUrl = :profilPictureUrl, 
-                confirmationToken = :confirmationToken, validateAt = :validateAt 
+                password = :password, role = :role, confirmationToken = :confirmationToken, 
+                validateAt = :validateAt 
                 WHERE userId = :id';
 
         return $this->dal->execute($sql, [
@@ -100,7 +99,6 @@ class UserRepository
             'email' => $user->getEmail(),
             'password' => $user->getPassword(),
             'role' => $user->getRole(),
-            'profilPictureUrl' => $user->getProfilPictureUrl(),
             'confirmationToken' => $user->getConfirmationToken(),
             'validateAt' => $user->getValidateAt()->format('Y-m-d H:i:s'),
             'id' => $user->getUserId(),
