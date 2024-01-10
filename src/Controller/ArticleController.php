@@ -93,15 +93,16 @@ class ArticleController extends AbstractController
             $article->setPromote(array_key_exists('promote', $this->request->getParams('POST')) ? true : false);
 
             $this->hydrator->hydrate($article, $this->request->getParams('POST'));
-
+            
             $article->setSlug($this->helpers->slugify($article->getTitle()));
             $article->setIsValidated(false);
-
-            if ($this->request->getParams('POST')['idCategory'] !== '') {
+            
+            if ($this->request->getParams('POST')['idCategory'] !== null) {
                 $article->setCategory($this->categoryRepository->getCategoryById((int) $this->request->getParams('POST')['idCategory']));
             } else {
                 $article->setCategory($this->categoryRepository->getCategoryById(1));
             }
+
 
             if (! $this->articlesRepository->createArticle($article)) {
                 return $this->render('admin/new.html.twig', ['message' => 'Une erreur est survenue lors de l\'ajout de l\'article !', 'categories' => $this->categoryRepository->getAllCategories()]);
@@ -127,10 +128,11 @@ class ArticleController extends AbstractController
 
             $article = new Article();
 
-            $article->setId($thisArticle['id']);
+            $article->setId($thisArticle->getId());
+
 
             if (! $this->request->getParams('POST')['thumbnail']) {
-                $article->setThumbnailUrl($thisArticle['thumbnailUrl']);
+                $article->setThumbnailUrl($thisArticle->getThumbnailUrl());
             } else {
                 $upload = $this->fileUploader->upload($this->files->get('thumbnail'));
 
@@ -148,13 +150,14 @@ class ArticleController extends AbstractController
                 return $this->render('admin/edit.html.twig', ['errors' => $errors, 'post' => $this->request->getParams('POST'), 'categories' => $this->categoryRepository->getAllCategories()]);
             }
 
-            $article->setAuthor($this->userRepository->getUserById($thisArticle['authorId']));
+            $article->setAuthor($this->userRepository->getUserById($thisArticle->getAuthor()->getUserId()));
             $article->setPromote(array_key_exists('promote', $this->request->getParams('POST')) ? true : false);
 
             $this->hydrator->hydrate($article, $this->request->getParams('POST'));
 
             $article->setSlug($this->helpers->slugify($article->getTitle()));
             $article->setIsValidated(false);
+            $article->setUpdateDate(new \DateTime('now'));
 
             if ($this->request->getParams('POST')['idCategory'] !== '') {
                 $article->setCategory($this->categoryRepository->getCategoryById((int) $this->request->getParams('POST')['idCategory']));
