@@ -42,6 +42,10 @@ class ArticlesRepository
         $this->dal->execute($sql);
         $data = $this->dal->fetchData('all');
 
+        if (empty($data)) {
+            return [];
+        }
+
         foreach ($data as &$article) {
             $categroy = new Category();
             $this->hydrator->hydrate($categroy, $article);
@@ -125,7 +129,7 @@ class ArticlesRepository
     */
     public function updateArticle(Article $article): bool
     {
-        $sql = 'UPDATE article SET content = :content, excerpt = :excerpt, title = :title, slug = :slug, thumbnailUrl = :thumbnailUrl, categoryId = :categoryId, authorId = :authorId, isValidated = :isValidated, promote = :promote
+        $sql = 'UPDATE article SET content = :content, excerpt = :excerpt, title = :title, slug = :slug, thumbnailUrl = :thumbnailUrl, updateDate = :updateDate, categoryId = :categoryId, authorId = :authorId, isValidated = :isValidated, promote = :promote
                 WHERE id = :id';
 
         return $this->dal->execute($sql, [
@@ -134,6 +138,7 @@ class ArticlesRepository
             'title' => $article->getTitle(),
             'slug' => $article->getSlug(),
             'thumbnailUrl' => $article->getThumbnailUrl(),
+            'updateDate' => $article->getUpdateDate()->format('Y-m-d H:i:s'),
             'categoryId' => $article->getCategory()->getCategoryId(),
             'authorId' => $article->getAuthor()->getUserId(),
             'isValidated' => $article->getIsValidated() ? 1 : 0,
