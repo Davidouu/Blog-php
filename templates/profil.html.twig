@@ -1,0 +1,35 @@
+{% extends "base.html.twig" %}
+
+{% block title %}David Didnik
+{% endblock %}
+
+{% block content %}
+{{ include('_banner.html.twig', {'title': 'Profil', 'text': ''}) }}
+<div class="container px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+        <div class="col-md-10 col-lg-8 col-xl-7">
+            {% include 'message.html.twig' %}
+            <h3>{{ user.firstName }} {{ user.lastName }}</h3>
+            <h3>{{ user.email }}</h3>
+            <form method="POST" action="">
+                <div class="form-floating">
+                    <input class="form-control" id="password" name="password" type="password" placeholder="Entrer un mot de passe" {% if post.password %} value="{{ post.password }}" {% endif %} required/>
+                    <label for="password">Mot de passe*</label>
+                    {% if errors.password %}
+                    <small class="small-test-error">{{ errors.password }}</small>
+                    {% endif %}
+                </div>
+                <div class="form-floating">
+                    <input class="form-control" id="passwordConfirm" name="passwordConfirm" type="password" placeholder="Entrer un mot de passe" {% if post.passwordConfirm %} value="{{ post.passwordConfirm }}" {% endif %} required/>
+                    <label for="passwordConfirm">Mot de passe*</label>
+                    {% if errors.passwordConfirm %}
+                    <small class="small-test-error">{{ errors.password }}</small>
+                    {% endif %}
+                </div>
+                <button class="btn btn-primary text-uppercase" id="submitButton" type="submit">Modifier le mot de passe</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
