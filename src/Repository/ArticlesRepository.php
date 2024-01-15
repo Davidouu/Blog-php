@@ -47,6 +47,7 @@ class ArticlesRepository
         $this->dal->execute($sql, $bindings);
         $data = $this->dal->fetchData('all');
 
+
         if (empty($data)) {
             return [];
         }
@@ -73,7 +74,7 @@ class ArticlesRepository
 
     /**
     * @param int $id
-    * @return array|null
+    * @return null|Article
     */
     public function getArticleById(int $id): ?Article
     {
