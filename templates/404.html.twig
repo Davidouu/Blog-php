@@ -1,0 +1,18 @@
+{% extends "base.html.twig" %}
+
+{% block title %}David Didnik - 404
+{% endblock %}
+
+{% block content %}
+{{ include('_banner.html.twig', {'title': '404', 'text': ''}) }}
+	<div class="container px-4 px-lg-5">
+		<div class="row gx-4 gx-lg-5 justify-content-center">
+			<div class="col-md-10 col-lg-8 col-xl-7">
+
+                <p>Désolé, la page que vous recherchez est introuvable.</p>
+                <p>Vous pouvez retourner à la page d'accueil en cliquant <a href="/">ici</a>.</p>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
