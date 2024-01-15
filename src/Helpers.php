@@ -2,7 +2,7 @@
 
 namespace App;
 
-class helpers
+class Helpers
 {
     /**
     * @param string $slug

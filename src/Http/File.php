@@ -2,7 +2,7 @@
 
 namespace App\Http;
 
-class file
+class File
 {
     /*
     * Get file

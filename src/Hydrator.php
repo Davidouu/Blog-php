@@ -19,7 +19,7 @@ class Hydrator
     * @param array $data
     * @return void
     */
-    public function Hydrate(object $entity, array $data): void
+    public function hydrate(object $entity, array $data): void
     {
         foreach ($data as $key => $value) {
             $method = 'set'.ucfirst($key);

@@ -2,7 +2,7 @@
 
 namespace App;
 
-class fileUploader
+class FileUploader
 {
     private string $path;
 
