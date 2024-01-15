@@ -47,11 +47,15 @@ class CommentRepository
                 INNER JOIN article ON comment.articleId = article.id 
                 INNER JOIN user ON comment.authorId = user.userId';
 
+        $bindings = [];
+
         if (isset($arrayOrder)) {
-            $sql .= ' ORDER BY '.$arrayOrder['column'].' '.$arrayOrder['order'];
+            $sql .= ' ORDER BY :column :order';
+            $bindings['column'] = $arrayOrder['column'];
+            $bindings['order'] = $arrayOrder['order'];
         }
 
-        $this->dal->execute($sql);
+        $this->dal->execute($sql, $bindings);
         $data = $this->dal->fetchData('all');
 
         // If no data
