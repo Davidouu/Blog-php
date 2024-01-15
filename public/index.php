@@ -12,17 +12,21 @@ use Twig\Loader\FilesystemLoader;
 
 $session = new Session();
 
+// Load environment variables
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__.'/../', '.env.local');
 $dotenv->load();
 
+// Twig
 $loader = new FilesystemLoader(__DIR__.'/../templates/');
 $twig = new Environment($loader, ['debug' => true]);
 
+// Add session var to twig
 $twig->addGlobal('session', $session);
 
 $request = new Request();
 $files = new File();
 
+// Router
 $router = new Router($request->getParam('GET', 'url'), $twig, $request, $session, $files);
 
 foreach (Routes::getRoutes() as $name => $route) {

@@ -23,7 +23,8 @@ class HomeController extends AbstractController
         parent::__construct($twig, $request, $session, $files);
     }
 
-    /*
+    /**
+     * Display all articles
     * @return string
     */
     public function index()

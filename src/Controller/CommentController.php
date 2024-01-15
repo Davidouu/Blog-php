@@ -34,6 +34,7 @@ class CommentController extends AbstractController
     }
 
     /**
+     * Display all comments
      * @param int $id
      * @param string $slug
      * @return string
@@ -69,6 +70,7 @@ class CommentController extends AbstractController
     }
 
     /**
+     * Validate a comment
      * @param int $id
      * @return void
      */
@@ -91,6 +93,7 @@ class CommentController extends AbstractController
     }
 
     /**
+     * Delete a comment
      * @param int $id
      * @return void
      */

@@ -5,6 +5,7 @@ namespace App\Http;
 class file
 {
     /*
+    * Get file
     * @param string $name
     * @return mixed
     */

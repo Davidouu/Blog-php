@@ -11,7 +11,7 @@ class fileUploader
         $this->path = dirname(__DIR__).'/public/';
     }
 
-    /*
+    /**
     * @param array $file
     * @return string
     */

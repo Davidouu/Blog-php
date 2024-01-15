@@ -18,7 +18,7 @@ class UserRepository
         $this->hydrator = new Hydrator();
     }
 
-    /*
+    /**
     * @param User $user
     * @return bool|User
     */
@@ -39,7 +39,7 @@ class UserRepository
         return false;
     }
 
-    /*
+    /**
     * @param User $user
     * @return bool|User
     */
@@ -60,7 +60,7 @@ class UserRepository
         return false;
     }
 
-    /*
+    /**
     * @param User $user
     * @return int
     */
@@ -81,7 +81,7 @@ class UserRepository
         return $this->dal->getLastInsertId();
     }
 
-    /*
+    /**
     * @param User $user
     * @return bool
     */
@@ -105,7 +105,7 @@ class UserRepository
         ]);
     }
 
-    /*
+    /**
     * @param User $user
     * @return bool
     */
@@ -123,7 +123,7 @@ class UserRepository
         return true;
     }
 
-    /*
+    /**
     * @param User $user
     * @return bool|string
     */
@@ -141,7 +141,7 @@ class UserRepository
         return false;
     }
 
-    /*
+    /**
     * @param User $user
     * @return bool|string
     */
@@ -159,7 +159,7 @@ class UserRepository
         return false;
     }
 
-    /*
+    /**
     * @param User $user
     * @return int|bool
     */

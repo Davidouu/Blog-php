@@ -33,6 +33,11 @@ class User
     }
 
     // Setters
+
+    /**
+     * @param int $id
+     * @return self
+     */
     public function setUserId(int $id): self
     {
         $this->userId = $id;
@@ -40,6 +45,10 @@ class User
         return $this;
     }
 
+    /**
+     * @param string $firstName
+     * @return self
+     */
     public function setFirstName(string $firstName): self
     {
         $this->firstName = $firstName;
@@ -47,6 +56,10 @@ class User
         return $this;
     }
 
+    /**
+     * @param string $lastname
+     * @return self
+     */
     public function setLastname(string $lastname): self
     {
         $this->lastName = $lastname;
@@ -54,6 +67,10 @@ class User
         return $this;
     }
 
+    /**
+     * @param string $email
+     * @return self
+     */
     public function setEmail(string $email): self
     {
         $this->email = strtolower($email);
@@ -61,6 +78,10 @@ class User
         return $this;
     }
 
+    /**
+     * @param string $password
+     * @return self
+     */
     public function setPassword(string $password): self
     {
         $this->password = $password;
@@ -68,6 +89,10 @@ class User
         return $this;
     }
 
+    /**
+     * @param string $role
+     * @return self
+     */
     public function setRole(string $role): self
     {
         $this->role = strtolower($role);
@@ -75,6 +100,10 @@ class User
         return $this;
     }
 
+    /**
+     * @param string $confirmationToken
+     * @return self
+     */
     public function setConfirmationToken(?string $confirmationToken): self
     {
         $this->confirmationToken = $confirmationToken;
@@ -82,6 +111,10 @@ class User
         return $this;
     }
 
+    /**
+     * @param \DateTime $validateAt
+     * @return self
+     */
     public function setValidateAt(?\DateTime $validateAt): self
     {
         $this->validateAt = $validateAt;
@@ -90,41 +123,66 @@ class User
     }
 
     // Getters
+
+    /**
+     * @return int $id
+     */
     public function getUserId(): int
     {
         return $this->userId;
     }
 
+    /**
+     * @return string $firstName
+     */
     public function getFirstName(): string
     {
         return ucfirst($this->firstName);
     }
 
+    /**
+     * @return string $lastname
+     */
     public function getLastname(): string
     {
         return strtoupper($this->lastName);
     }
 
+    /**
+     * @return string $email
+     */
     public function getEmail(): string
     {
         return $this->email;
     }
 
+    /**
+     * @return string $password
+     */
     public function getPassword(): string
     {
         return $this->password;
     }
 
+    /**
+     * @return ?string $role
+     */
     public function getRole(): ?string
     {
         return $this->role;
     }
 
+    /**
+     * @return ?string $confirmationToken
+     */
     public function getConfirmationToken(): ?string
     {
         return $this->confirmationToken;
     }
 
+    /**
+     * @return ?\DateTime $validateAt
+     */
     public function getValidateAt(): ?\DateTime
     {
         return $this->validateAt;

@@ -20,7 +20,7 @@ class ArticlesRepository
         $this->hydrator = new Hydrator();
     }
 
-    /*
+    /**
     * @param array|null $arrayOrder
     * @param int|null $articlesLimit
     * @return array
@@ -66,7 +66,7 @@ class ArticlesRepository
         return $articles;
     }
 
-    /*
+    /**
     * @param int $id
     * @return array|null
     */
@@ -101,7 +101,7 @@ class ArticlesRepository
 
     }
 
-    /*
+    /**
     * @param Article $article
     * @return bool
     */
@@ -123,7 +123,7 @@ class ArticlesRepository
         ]);
     }
 
-    /*
+    /**
     * @param Article $article
     * @return bool
     */
@@ -147,7 +147,7 @@ class ArticlesRepository
         ]);
     }
 
-    /*
+    /**
     * @param int $id
     * @return bool
     */
@@ -158,7 +158,7 @@ class ArticlesRepository
         return $this->dal->execute($sql, ['id' => $id]);
     }
 
-    /*
+    /**
     * @param int $id
     * @return bool
     */
@@ -169,7 +169,7 @@ class ArticlesRepository
         return $this->dal->execute($sql, ['id' => $id]);
     }
 
-    /*
+    /**
     * @param int $id
     * @return bool
     */

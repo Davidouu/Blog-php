@@ -26,6 +26,9 @@ abstract class AbstractController
 
     /**
      * Render the twig template.
+     * @param string $template
+     * @param array $data
+     * @return string
      */
     protected function render(string $template, array $data = []): string
     {
@@ -36,8 +39,10 @@ abstract class AbstractController
         }
     }
 
-    /*
+    /**
     * Redirect the user
+    * @param string $url
+    * @return void
     */
     protected function redirect(string $url): void
     {

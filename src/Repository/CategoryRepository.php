@@ -18,10 +18,10 @@ class CategoryRepository
         $this->hydrator = new Hydrator();
     }
 
-    /*
-    * @return Category[]
+    /**
+    * @return array Category
     */
-    public function getAllCategories()
+    public function getAllCategories(): array
     {
         $sql = 'SELECT * FROM category';
 
@@ -38,7 +38,7 @@ class CategoryRepository
         return $categories;
     }
 
-    /*
+    /**
     * @param int $id
     * @return Category|null
     */
@@ -59,7 +59,7 @@ class CategoryRepository
         return $category;
     }
 
-    /*
+    /**
     * @param Category $category
     * @return bool
     */
@@ -72,7 +72,7 @@ class CategoryRepository
         return true;
     }
 
-    /*
+    /**
     * @param Category $category
     * @return bool
     */
@@ -85,7 +85,7 @@ class CategoryRepository
         return true;
     }
 
-    /*
+    /**
     * @param int $id
     * @return bool
     */

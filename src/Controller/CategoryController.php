@@ -28,7 +28,11 @@ class CategoryController extends AbstractController
         parent::__construct($twig, $request, $session, $files);
     }
 
-    public function newCategory()
+    /**
+    * Create a new category
+    * @return string
+    */
+    public function newCategory(): string
     {
         if (! empty($this->request->getParams('POST'))) {
             $categ = new Category();
@@ -54,10 +58,12 @@ class CategoryController extends AbstractController
         return $this->render('admin/newCategory.html.twig');
     }
 
-    /*
+    /**
+    * Edit a category
     * @param int $id
+    * @return string
     */
-    public function editCategory(int $id)
+    public function editCategory(int $id): string
     {
         if (! empty($this->request->getParams('POST'))) {
             $categ = new Category();
@@ -86,10 +92,12 @@ class CategoryController extends AbstractController
         return $this->render('admin/editCategory.html.twig', ['category' => $categ, 'type' => 'edit']);
     }
 
-    /*
+    /**
+    * Delete a category
     * @param int $id
+    * @return string
     */
-    public function deleteCategory(int $id)
+    public function deleteCategory(int $id): string
     {
         if (! $this->categoryRepository->deleteCategory($id)) {
             return $this->render('admin/editCategory.html.twig', ['message' => 'Un article possède la catégorie que vous souhaitez supprimer', 'category' => $this->categoryRepository->getCategoryById($id), 'type' => 'edit']);

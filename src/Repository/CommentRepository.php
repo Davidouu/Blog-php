@@ -20,7 +20,7 @@ class CommentRepository
         $this->hydrator = new Hydrator();
     }
 
-    /*
+    /**
     * @param Comment $comment
     * @return bool
     */
@@ -38,7 +38,7 @@ class CommentRepository
         return $this->dal->getLastInsertId();
     }
 
-    /*
+    /**
     * @return bool|array
     */
     public function getAllComments(?array $arrayOrder): bool|array
@@ -79,7 +79,7 @@ class CommentRepository
         return $comments;
     }
 
-    /*
+    /**
     * @param int $id
     * @return bool|array
     */
@@ -119,7 +119,7 @@ class CommentRepository
         return $comments;
     }
 
-    /*
+    /**
     * @param int $id
     * @return bool|Comment
     */
@@ -153,7 +153,7 @@ class CommentRepository
         return $comment;
     }
 
-    /*
+    /**
     * @param Comment $comment
     * @return bool
     */
@@ -170,7 +170,7 @@ class CommentRepository
         ]);
     }
 
-    /*
+    /**
     * @param Comment $comment
     * @return bool
     */
