@@ -5,6 +5,9 @@
 				<div class="site-heading">
 					<h1>{{ title }}</h1>
 					<span class="subheading">{{ text }}</span>
+					{% if page == 'home' %}
+						<a style="color: #fff; font-size: 22px; text-decoration: underline;" href="/uploads/cv_didnik_dev.pdf" target="_blank">Mon CV</a>
+					{% endif %}
 				</div>
 			</div>
 		</div>
