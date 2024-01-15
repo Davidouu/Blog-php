@@ -27,6 +27,23 @@
 					{{ include('_formComment.html.twig', {'button_label': 'Commenter'}) }}
 				{% endif %}
 
+				{% for comment in comments %}
+
+					<p>
+						<strong>{{ comment.author.firstName }} {{ comment.author.lastName }}</strong>
+						le {{ comment.updateDate|date("d/m/Y") }}
+					</p>
+					<p style="margin-left: 15px;">{{ comment.commentContent }}</p>
+
+						{% if loop.last %}
+
+						{% else %}
+							<!-- Divider-->
+							<hr class="my-4"/>
+						{% endif %}
+
+				{% endfor %}
+
 			</div>
 		</div>
 	</div>

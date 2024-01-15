@@ -45,9 +45,9 @@ class Router
     public function run()
     {
         if (! isset($this->routes[$this->request->getMethod()])) {
-            // header('HTTP/1.0 404 Not Found');
+            header('HTTP/1.0 404 Not Found');
 
-            // return $this->twig->render('404.html.twig');
+            return $this->twig->render('404.html.twig');
         }
 
         foreach ($this->routes[$this->request->getMethod()] as $route) {
@@ -56,9 +56,8 @@ class Router
                 return $route->call($this->twig, $this->request, $this->session, $this->files);
             }
         }
+        header('HTTP/1.0 404 Not Found');
 
-        // header('HTTP/1.0 404 Not Found');
-
-        // return $this->twig->render('404.html.twig');
+        return $this->twig->render('404.html.twig');
     }
 }

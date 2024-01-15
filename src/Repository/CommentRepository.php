@@ -81,6 +81,46 @@ class CommentRepository
 
     /*
     * @param int $id
+    * @return bool|array
+    */
+    public function getCommentsByArticleId(int $id): bool|array
+    {
+        $sql = 'SELECT * FROM comment 
+                INNER JOIN article ON comment.articleId = article.id 
+                INNER JOIN user ON comment.authorId = user.userId 
+                WHERE article.id = :id 
+                ORDER BY comment.publishedAt DESC';
+
+        $this->dal->execute($sql, ['id' => $id]);
+        $data = $this->dal->fetchData('all');
+
+        // If no data
+        if (empty($data)) {
+            return $data;
+        }
+
+        foreach ($data as &$comment) {
+            $article = new Article();
+            $this->hydrator->hydrate($article, $comment);
+
+            $comment['article'] = $article;
+
+            $user = new User();
+            $this->hydrator->hydrate($user, $comment);
+
+            $comment['author'] = $user;
+
+            $commentObject = new Comment();
+            $this->hydrator->hydrate($commentObject, $comment);
+
+            $comments[] = $commentObject;
+        }
+
+        return $comments;
+    }
+
+    /*
+    * @param int $id
     * @return bool|Comment
     */
     public function getCommentById(int $id): bool|Comment

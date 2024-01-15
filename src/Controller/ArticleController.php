@@ -12,6 +12,7 @@ use App\Hydrator;
 use App\Repository\ArticlesRepository;
 use App\Repository\CategoryRepository;
 use App\Repository\UserRepository;
+use App\Repository\CommentRepository;
 use App\Validator\Validator;
 use Twig\Environment;
 
@@ -22,6 +23,8 @@ class ArticleController extends AbstractController
     private CategoryRepository $categoryRepository;
 
     private UserRepository $userRepository;
+
+    private CommentRepository $commentRepository;
 
     private Hydrator $hydrator;
 
@@ -34,6 +37,7 @@ class ArticleController extends AbstractController
         $this->articlesRepository = new ArticlesRepository();
         $this->categoryRepository = new CategoryRepository();
         $this->userRepository = new UserRepository();
+        $this->commentRepository = new CommentRepository();
         $this->hydrator = new Hydrator();
         $this->helpers = new Helpers();
         $this->fileUploader = new FileUploader(['png', 'jpeg', 'jpg']);
@@ -58,12 +62,13 @@ class ArticleController extends AbstractController
     public function show(int $id, string $slug): string
     {
         $article = $this->articlesRepository->getArticleById($id);
+        $comments = $this->commentRepository->getCommentsByArticleId($id);
 
         if ($article === null) {
             $this->redirect('/articles');
         }
 
-        return $this->render('article.html.twig', ['article' => $article]);
+        return $this->render('article.html.twig', ['article' => $article, 'comments' => $comments]);
     }
 
     /*
