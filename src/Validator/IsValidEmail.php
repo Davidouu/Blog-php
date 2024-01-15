@@ -9,6 +9,10 @@ class IsValidEmail
     {
     }
 
+    /**
+     * @param string $value
+     * @return bool
+     */
     public function validate(string $value): bool
     {
         if (! filter_var($value, FILTER_VALIDATE_EMAIL)) {
@@ -19,6 +23,9 @@ class IsValidEmail
         return true;
     }
 
+    /**
+     * @return string
+     */
     public function getMessage(): string
     {
         return $this->message;

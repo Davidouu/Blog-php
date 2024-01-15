@@ -35,6 +35,10 @@ class Article
 
     // Setters
 
+    /**
+     * @param int $id
+     * @return self
+     */
     public function setId(int $id): self
     {
         $this->id = $id;
@@ -42,6 +46,10 @@ class Article
         return $this;
     }
 
+    /**
+     * @param string $content
+     * @return self
+     */
     public function setContent(string $content): self
     {
         $this->content = $content;
@@ -49,6 +57,10 @@ class Article
         return $this;
     }
 
+    /**
+     * @param string $excerpt
+     * @return self
+     */
     public function setExcerpt(string $excerpt): self
     {
         $this->excerpt = $excerpt;
@@ -56,6 +68,10 @@ class Article
         return $this;
     }
 
+    /**
+     * @param string $title
+     * @return self
+     */
     public function setTitle(string $title): self
     {
         $this->title = $title;
@@ -63,6 +79,10 @@ class Article
         return $this;
     }
 
+    /**
+     * @param string $slug
+     * @return self
+     */
     public function setSlug(string $slug): self
     {
         $this->slug = $slug;
@@ -70,6 +90,10 @@ class Article
         return $this;
     }
 
+    /**
+     * @param \DateTime $publishDate
+     * @return self
+     */
     public function setPublishDate(\DateTime $publishDate): self
     {
         $this->publishDate = $publishDate;
@@ -77,6 +101,10 @@ class Article
         return $this;
     }
 
+    /**
+     * @param \DateTime $updateDate
+     * @return self
+     */
     public function setUpdateDate(\DateTime $updateDate): self
     {
         $this->updateDate = $updateDate;
@@ -84,6 +112,10 @@ class Article
         return $this;
     }
 
+    /**
+     * @param string $thumbnailUrl
+     * @return self
+     */
     public function setThumbnailUrl(string $thumbnailUrl): self
     {
         $this->thumbnailUrl = $thumbnailUrl;
@@ -91,6 +123,10 @@ class Article
         return $this;
     }
 
+    /**
+     * @param Category $category
+     * @return self
+     */
     public function setCategory(Category $category): self
     {
         $this->category = $category;
@@ -98,6 +134,10 @@ class Article
         return $this;
     }
 
+    /**
+     * @param User $author
+     * @return self
+     */
     public function setAuthor(User $author): self
     {
         $this->author = $author;
@@ -105,6 +145,10 @@ class Article
         return $this;
     }
 
+    /**
+     * @param bool $isValidated
+     * @return self
+     */
     public function setIsValidated(bool $isValidated): self
     {
         $this->isValidated = $isValidated;
@@ -112,6 +156,10 @@ class Article
         return $this;
     }
 
+    /**
+     * @param bool $promote
+     * @return self
+     */
     public function setPromote(bool $promote): self
     {
         $this->promote = $promote;
@@ -121,61 +169,97 @@ class Article
 
     // Getters
 
+    /**
+     * @return int $id
+     */
     public function getId(): int
     {
         return $this->id;
     }
 
+    /**
+     * @return string $content
+     */
     public function getContent(): string
     {
         return $this->content;
     }
 
+    /**
+     * @return string $excerpt
+     */
     public function getExcerpt(): string
     {
         return $this->excerpt;
     }
 
+    /**
+     * @return string $title
+     */
     public function getTitle(): string
     {
         return $this->title;
     }
 
+    /**
+     * @return string $slug
+     */
     public function getSlug(): string
     {
         return $this->slug;
     }
 
+    /**
+     * @return \DateTime $publishDate
+     */
     public function getPublishDate(): \DateTime
     {
         return $this->publishDate;
     }
 
+    /**
+     * @return \DateTime $updateDate
+     */
     public function getUpdateDate(): \DateTime
     {
         return $this->updateDate;
     }
 
+    /**
+     * @return string $thumbnailUrl
+     */
     public function getThumbnailUrl(): string
     {
         return $this->thumbnailUrl;
     }
 
+    /**
+     * @return Category $category
+     */
     public function getCategory(): Category
     {
         return $this->category;
     }
 
+    /**
+     * @return User $author
+     */
     public function getAuthor(): User
     {
         return $this->author;
     }
 
+    /**
+     * @return bool $isValidated
+     */
     public function getIsValidated(): bool
     {
         return $this->isValidated;
     }
 
+    /**
+     * @return bool $promote
+     */
     public function getPromote(): bool
     {
         return $this->promote;

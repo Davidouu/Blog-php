@@ -23,17 +23,23 @@ class Router
 
     /**
      * Add a GET route.
+     * @param string $path
+     * @param \Closure|string $callable
+     * @return void
      */
-    public function get($path, $callable)
+    public function get($path, $callable): void
     {
         $route = new Route($path, $callable);
         $this->routes['GET'][] = $route;
     }
 
-    /*
+    /**
     * Add a POST route.
+    * @param string $path
+    * @param \Closure|string $callable
+    * @return void
     */
-    public function post($path, $callable)
+    public function post($path, $callable): void
     {
         $route = new Route($path, $callable);
         $this->routes['POST'][] = $route;
@@ -41,8 +47,9 @@ class Router
 
     /**
      * Run the router.
+     * @return mixed
      */
-    public function run()
+    public function run(): mixed
     {
         if (! isset($this->routes[$this->request->getMethod()])) {
             header('HTTP/1.0 404 Not Found');

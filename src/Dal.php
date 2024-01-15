@@ -21,7 +21,12 @@ class Dal
         }
     }
 
-    // Execute query
+    /**
+     * Execute query
+     * @param string $query
+     * @param object|array $data
+     * @return bool
+     */
     public function execute(string $query, object|array $data = []): bool
     {
         try {
@@ -40,7 +45,11 @@ class Dal
         }
     }
 
-    // Fetch data
+    /**
+     * Fetch data
+     * @param string $fetchType
+     * @return array
+     */
     public function fetchData(string $fetchType): array
     {
         try {
@@ -58,7 +67,10 @@ class Dal
         }
     }
 
-    // Get last insert id
+    /**
+     * Get last insert id
+     * @return int
+     */
     public function getLastInsertId(): int
     {
         return $this->pdo->lastInsertId();

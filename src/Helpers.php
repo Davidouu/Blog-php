@@ -4,7 +4,7 @@ namespace App;
 
 class helpers
 {
-    /*
+    /**
     * @param string $slug
     * @return string
     */

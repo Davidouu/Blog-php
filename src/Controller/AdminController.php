@@ -31,6 +31,10 @@ class AdminController extends AbstractController
         parent::__construct($twig, $request, $session, $files);
     }
 
+    /**
+    * Display the admin dashboard.
+    * @return string
+    */
     public function index(): string
     {
         $articles = $this->articlesRepository->getAllArticles(['column' => 'updateDate', 'order' => 'DESC'], null);

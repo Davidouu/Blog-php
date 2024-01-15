@@ -14,6 +14,11 @@ class category
     private string $categorySlug;
 
     // Setters
+
+    /**
+     * @param int $id
+     * @return self
+     */
     public function setCategoryId(int $categoryId): self
     {
         $this->categoryId = $categoryId;
@@ -21,6 +26,10 @@ class category
         return $this;
     }
 
+    /**
+     * @param string $content
+     * @return self
+     */
     public function setName(string $name): self
     {
         $this->name = $name;
@@ -28,6 +37,10 @@ class category
         return $this;
     }
 
+    /**
+     * @param string $categorySlug
+     * @return self
+     */
     public function setCategorySlug(string $categorySlug): self
     {
         $this->categorySlug = $categorySlug;
@@ -36,16 +49,26 @@ class category
     }
 
     // Getters
+
+    /**
+     * @return int $categoryId
+     */
     public function getCategoryId(): ?int
     {
         return $this->categoryId;
     }
 
+    /**
+     * @return string $content
+     */
     public function getName(): string
     {
         return ucfirst($this->name);
     }
 
+    /**
+     * @return string $categorySlug
+     */
     public function getCategorySlug(): string
     {
         return $this->categorySlug;

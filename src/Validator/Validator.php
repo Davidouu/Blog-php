@@ -4,7 +4,12 @@ namespace App\Validator;
 
 class Validator
 {
-    // Method to validate an object with attributes
+    /**
+     * Method to validate an object with attributes
+     * @param object $object
+     * @param array $data
+     * @return array
+     */
     public function validate(object $object, array $data): array
     {
         $class = new \ReflectionClass($object);

@@ -45,6 +45,7 @@ class ArticleController extends AbstractController
     }
 
     /*
+    * Display all articles
     * @return string
     */
     public function index(): string
@@ -55,6 +56,7 @@ class ArticleController extends AbstractController
     }
 
     /*
+    * Display one article
     * @param int $id
     * @param string $slug
     * @return string
@@ -72,6 +74,7 @@ class ArticleController extends AbstractController
     }
 
     /*
+    * Create an article
     * @return string
     */
     public function newArticle(): string
@@ -121,6 +124,7 @@ class ArticleController extends AbstractController
     }
 
     /*
+    * Edit an article
     * @param int $id
     * @param string $slug
     * @return string
@@ -181,7 +185,8 @@ class ArticleController extends AbstractController
         return $this->render('admin/edit.html.twig', ['categories' => $this->categoryRepository->getAllCategories(), 'article' => $thisArticle, 'type' => 'modification']);
     }
 
-    /*
+    /**
+    * Delete an article
     * @param int $id
     * @return void
     */
@@ -191,7 +196,8 @@ class ArticleController extends AbstractController
         $this->redirect('/admin');
     }
 
-    /*
+    /**
+    * Validate an article
     * @param int $id
     * @return void
     */
@@ -201,7 +207,8 @@ class ArticleController extends AbstractController
         $this->redirect('/admin');
     }
 
-    /*
+    /**
+    * Unvalidate an article
     * @param int $id
     * @return void
     */

@@ -25,8 +25,10 @@ class Route
 
     /**
      * Check if the route matches the URL.
+     * @param string $url
+     * @return bool
      */
-    public function match($url)
+    public function match($url): bool
     {
         $url = trim($url, '/');
         $path = preg_replace_callback('#:([\w]+)#', [$this, 'paramMatch'], $this->path);
@@ -42,8 +44,13 @@ class Route
 
     /**
      * Call the controller method.
+     * @param Environment $twig
+     * @param Request $request
+     * @param Session $session
+     * @param File $files
+     * @return mixed
      */
-    public function call(Environment $twig, Request $request, Session $session, File $files)
+    public function call(Environment $twig, Request $request, Session $session, File $files): mixed
     {
         if (is_string($this->callable)) {
             $params = explode('->', $this->callable);

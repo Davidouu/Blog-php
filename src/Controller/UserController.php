@@ -25,7 +25,8 @@ class UserController extends AbstractController
         parent::__construct($twig, $request, $session, $files);
     }
 
-    /*
+    /**
+     * Display all users
     * Register user
     * @return string
     */
@@ -71,7 +72,7 @@ class UserController extends AbstractController
         return $this->render('register.html.twig');
     }
 
-    /*
+    /**
     * Confirmation account
     * @param string $id
     * @param string $token
@@ -97,7 +98,7 @@ class UserController extends AbstractController
         return $this->render('register.html.twig', ['message' => 'Votre compte n\'a pas pu être confirmé !']);
     }
 
-    /*
+    /**
     * Login user
     * @return string
     */
@@ -138,7 +139,7 @@ class UserController extends AbstractController
         return $this->render('connexion.html.twig', ['message' => 'Le mot de passe est incorrect !']);
     }
 
-    /*
+    /**
     * Logout user
     * @return void
     */
@@ -148,7 +149,7 @@ class UserController extends AbstractController
         $this->redirect('/');
     }
 
-    /*
+    /**
     * Profil page
     * @return string
     */
