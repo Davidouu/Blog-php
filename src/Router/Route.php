@@ -17,7 +17,7 @@ class Route
 
     private $path;
 
-    public function __construct($path, $callable)
+    public function __construct(string $path, string $callable)
     {
         $this->path = trim($path, '/');
         $this->callable = $callable;
