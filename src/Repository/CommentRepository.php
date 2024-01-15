@@ -22,9 +22,9 @@ class CommentRepository
 
     /**
     * @param Comment $comment
-    * @return bool
+    * @return int
     */
-    public function addComment(Comment $comment): bool
+    public function addComment(Comment $comment): int
     {
         $sql = 'INSERT INTO comment (commentContent, isCommentValidated, authorId, articleId) VALUES (:commentContent, :isCommentValidated, :authorId, :articleId)';
 
@@ -47,11 +47,15 @@ class CommentRepository
                 INNER JOIN article ON comment.articleId = article.id 
                 INNER JOIN user ON comment.authorId = user.userId';
 
+        $bindings = [];
+
         if (isset($arrayOrder)) {
-            $sql .= ' ORDER BY '.$arrayOrder['column'].' '.$arrayOrder['order'];
+            $sql .= ' ORDER BY :column :order';
+            $bindings['column'] = $arrayOrder['column'];
+            $bindings['order'] = $arrayOrder['order'];
         }
 
-        $this->dal->execute($sql);
+        $this->dal->execute($sql, $bindings);
         $data = $this->dal->fetchData('all');
 
         // If no data
@@ -121,9 +125,9 @@ class CommentRepository
 
     /**
     * @param int $id
-    * @return bool|Comment
+    * @return null|Comment
     */
-    public function getCommentById(int $id): bool|Comment
+    public function getCommentById(int $id): null|Comment
     {
         $sql = 'SELECT * FROM comment 
                 INNER JOIN article ON comment.articleId = article.id 

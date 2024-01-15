@@ -31,16 +31,22 @@ class ArticlesRepository
                 INNER JOIN category ON article.categoryId = category.categoryId 
                 INNER JOIN user ON article.authorId = user.userId';
 
+        $bindings = [];
+
         if (isset($arrayOrder)) {
-            $sql .= ' ORDER BY '.$arrayOrder['column'].' '.$arrayOrder['order'];
+            $sql .= ' ORDER BY :column :order';
+            $bindings['column'] = $arrayOrder['column'];
+            $bindings['order'] = $arrayOrder['order'];
         }
 
         if (isset($articlesLimit)) {
-            $sql .= ' LIMIT '.$articlesLimit;
+            $sql .= ' LIMIT :limit';
+            $bindings['limit'] = $articlesLimit;
         }
 
-        $this->dal->execute($sql);
+        $this->dal->execute($sql, $bindings);
         $data = $this->dal->fetchData('all');
+
 
         if (empty($data)) {
             return [];
@@ -68,7 +74,7 @@ class ArticlesRepository
 
     /**
     * @param int $id
-    * @return array|null
+    * @return null|Article
     */
     public function getArticleById(int $id): ?Article
     {

@@ -69,9 +69,9 @@ class Dal
 
     /**
      * Get last insert id
-     * @return int
+     * @return string|bool
      */
-    public function getLastInsertId(): int
+    public function getLastInsertId(): string|bool
     {
         return $this->pdo->lastInsertId();
     }
