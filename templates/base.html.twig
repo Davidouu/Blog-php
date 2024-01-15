@@ -105,8 +105,8 @@
 							<ul>
 								<li><a href="/">Home</a></li>
 								<li><a href="/articles">Articles</a></li>
-								<li><a href="#">Contact</a></li>
-								<li><a href="#">CV</a></li>
+								<li><a href="/">Contact</a></li>
+								<li><a href="/uploads/cv_didnik_dev.pdf" target="_blank">CV</a></li>
 								{% if session.get('user') and session.get('user').role == 'admin' or session.get('user').role == 'editor' %}
 								<li><a href="/admin">Administration</a></li>
 								{% endif %}
