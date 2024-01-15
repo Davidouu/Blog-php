@@ -4,7 +4,7 @@ namespace App\Entity;
 
 use App\Validator\IsNotEmpty;
 
-class category
+class Category
 {
     private int $categoryId;
 
