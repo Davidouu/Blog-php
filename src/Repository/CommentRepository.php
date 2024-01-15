@@ -22,9 +22,9 @@ class CommentRepository
 
     /**
     * @param Comment $comment
-    * @return bool
+    * @return int
     */
-    public function addComment(Comment $comment): bool
+    public function addComment(Comment $comment): int
     {
         $sql = 'INSERT INTO comment (commentContent, isCommentValidated, authorId, articleId) VALUES (:commentContent, :isCommentValidated, :authorId, :articleId)';
 
@@ -125,9 +125,9 @@ class CommentRepository
 
     /**
     * @param int $id
-    * @return bool|Comment
+    * @return null|Comment
     */
-    public function getCommentById(int $id): bool|Comment
+    public function getCommentById(int $id): null|Comment
     {
         $sql = 'SELECT * FROM comment 
                 INNER JOIN article ON comment.articleId = article.id 
