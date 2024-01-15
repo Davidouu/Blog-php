@@ -22,9 +22,9 @@ class CommentRepository
 
     /**
     * @param Comment $comment
-    * @return int
+    * @return string|bool
     */
-    public function addComment(Comment $comment): int
+    public function addComment(Comment $comment): string|bool
     {
         $sql = 'INSERT INTO comment (commentContent, isCommentValidated, authorId, articleId) VALUES (:commentContent, :isCommentValidated, :authorId, :articleId)';
 
