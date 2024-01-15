@@ -62,9 +62,9 @@ class UserRepository
 
     /**
     * @param User $user
-    * @return int
+    * @return string|bool
     */
-    public function addUser(User $user): int
+    public function addUser(User $user): string|bool
     {
         $sql = 'INSERT INTO user (firstName, lastName, email, password, role, profilPictureUrl, confirmationToken) 
                 VALUES (:firstName, :lastName, :email, :password, :role, :profilPictureUrl, :confirmationToken)';
