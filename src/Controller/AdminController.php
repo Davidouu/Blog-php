@@ -37,7 +37,7 @@ class AdminController extends AbstractController
     */
     public function index(): string
     {
-        $articles = $this->articlesRepository->getAllArticles(['column' => 'updateDate', 'order' => 'DESC'], null);
+        $articles = $this->articlesRepository->getAllArticles(null);
         $categories = $this->categoryRepository->getAllCategories();
         $comments = $this->commentRepository->getAllComments(null);
 

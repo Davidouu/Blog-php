@@ -30,7 +30,7 @@ class HomeController extends AbstractController
     public function index()
     {
         if (empty($this->request->getParams('POST'))) {
-            $articles = $this->articlesRepository->getAllArticles(['column' => 'updateDate', 'order' => 'DESC'], null);
+            $articles = $this->articlesRepository->getAllArticles(null);
 
             return $this->render('index.html.twig', [
                 'title' => 'Home',

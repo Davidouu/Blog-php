@@ -50,7 +50,7 @@ class ArticleController extends AbstractController
     */
     public function index(): string
     {
-        $articles = $this->articlesRepository->getAllArticles(['column' => 'updateDate', 'order' => 'DESC'], null);
+        $articles = $this->articlesRepository->getAllArticles(null);
 
         return $this->render('articles.html.twig', ['articles' => $articles]);
     }
@@ -87,6 +87,7 @@ class ArticleController extends AbstractController
             if (is_array($upload)) {
                 return $this->render('admin/new.html.twig', ['errors' => $upload, 'post' => $this->request->getParams('POST'), 'categories' => $this->categoryRepository->getAllCategories()]);
             }
+
 
             $article->setThumbnailUrl($upload);
 
@@ -146,7 +147,7 @@ class ArticleController extends AbstractController
                 $upload = $this->fileUploader->upload($this->files->get('thumbnail'));
 
                 if (is_array($upload)) {
-                    return $this->render('admin/new.html.twig', ['errors' => $upload, 'post' => $this->request->getParams('POST'), 'categories' => $this->categoryRepository->getAllCategories()]);
+                    return $this->render('admin/edit.html.twig', ['errors' => $upload, 'post' => $this->request->getParams('POST'), 'categories' => $this->categoryRepository->getAllCategories()]);
                 }
 
                 $article->setThumbnailUrl($upload);
@@ -166,7 +167,10 @@ class ArticleController extends AbstractController
 
             $article->setSlug($this->helpers->slugify($article->getTitle()));
             $article->setIsValidated(false);
-            $article->setUpdateDate(new \DateTime('now'));
+
+            $timezone = new \DateTimeZone('Europe/Paris');
+
+            $article->setUpdateDate(new \DateTime('now', $timezone));
 
             if ($this->request->getParams('POST')['idCategory'] !== '') {
                 $article->setCategory($this->categoryRepository->getCategoryById((int) $this->request->getParams('POST')['idCategory']));
@@ -181,6 +185,8 @@ class ArticleController extends AbstractController
             $this->redirect('/admin');
 
         }
+
+        // dd($thisArticle, $this->categoryRepository->getAllCategories());
 
         return $this->render('admin/edit.html.twig', ['categories' => $this->categoryRepository->getAllCategories(), 'article' => $thisArticle, 'type' => 'modification']);
     }
