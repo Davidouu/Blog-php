@@ -92,7 +92,7 @@ class CommentRepository
         $sql = 'SELECT * FROM comment 
                 INNER JOIN article ON comment.articleId = article.id 
                 INNER JOIN user ON comment.authorId = user.userId 
-                WHERE article.id = :id 
+                WHERE article.id = :id AND comment.isCommentValidated = 1
                 ORDER BY comment.publishedAt DESC';
 
         $this->dal->execute($sql, ['id' => $id]);
