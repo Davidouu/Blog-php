@@ -25,19 +25,13 @@ class ArticlesRepository
     * @param int|null $articlesLimit
     * @return array
     */
-    public function getAllArticles(?array $arrayOrder, ?int $articlesLimit): array
+    public function getAllArticles(?int $articlesLimit): array
     {
         $sql = 'SELECT * FROM article
                 INNER JOIN category ON article.categoryId = category.categoryId 
-                INNER JOIN user ON article.authorId = user.userId';
+                INNER JOIN user ON article.authorId = user.userId ORDER BY updateDate DESC';
 
         $bindings = [];
-
-        if (isset($arrayOrder)) {
-            $sql .= ' ORDER BY :column :order';
-            $bindings['column'] = $arrayOrder['column'];
-            $bindings['order'] = $arrayOrder['order'];
-        }
 
         if (isset($articlesLimit)) {
             $sql .= ' LIMIT :limit';

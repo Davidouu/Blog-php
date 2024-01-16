@@ -43,16 +43,18 @@ class UserController extends AbstractController
                 return $this->render('register.html.twig', ['errors' => $errors, 'post' => $this->request->getParams('POST')]);
             }
 
+            
             $this->hydrator->hydrate($user, $this->request->getParams('POST'));
             $user->setPassword(password_hash($this->request->getParam('POST', 'password'), PASSWORD_DEFAULT));
-
+            
             $token = TokenGenerator::generateToken();
             $user->setConfirmationToken($token);
-
+            $user->setRole('user');
+            
             if ($this->UserRepository->getUserByEmail($user)) {
                 return $this->render('register.html.twig', ['message' => 'Un compte existe déjà avec cette adresse mail !']);
             }
-
+            
             $userId = $this->UserRepository->addUser($user);
 
             if ($userId) {

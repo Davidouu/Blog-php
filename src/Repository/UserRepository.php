@@ -66,9 +66,9 @@ class UserRepository
     */
     public function addUser(User $user): string|bool
     {
-        $sql = 'INSERT INTO user (firstName, lastName, email, password, role, profilPictureUrl, confirmationToken) 
-                VALUES (:firstName, :lastName, :email, :password, :role, :profilPictureUrl, :confirmationToken)';
-
+        $sql = 'INSERT INTO user (firstName, lastName, email, password, role, confirmationToken) 
+                VALUES (:firstName, :lastName, :email, :password, :role, :confirmationToken)';
+                
         $this->dal->execute($sql, [
             'firstName' => $user->getFirstname(),
             'lastName' => $user->getLastname(),

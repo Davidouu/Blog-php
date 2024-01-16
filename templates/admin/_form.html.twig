@@ -37,7 +37,7 @@
             <select class="form-select" id="idCategory" name="idCategory">
                 <option value="" {% if type != 'modification'%} selected {% endif %} disabled>Choisir une catégorie</option>
                 {% for category in categories %}
-                    <option {% if type == 'modification' and article.categoryId == category.categoryId %} selected {% endif %} value="{{ category.categoryId }}">{{ category.name }}</option>
+                    <option {% if type == 'modification' and article.category.categoryId == category.categoryId %} selected {% endif %} value="{{ category.categoryId }}">{{ category.name }}</option>
                 {% endfor %}
             </select>
 			<label for="category">Catégorie*</label>
