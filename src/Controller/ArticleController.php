@@ -186,8 +186,6 @@ class ArticleController extends AbstractController
 
         }
 
-        // dd($thisArticle, $this->categoryRepository->getAllCategories());
-
         return $this->render('admin/edit.html.twig', ['categories' => $this->categoryRepository->getAllCategories(), 'article' => $thisArticle, 'type' => 'modification']);
     }
 

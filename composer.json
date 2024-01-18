@@ -1,23 +1,24 @@
 {
-    "name": "ddidn/blog-php",
-    "description": "Blog php from scratch, for a school project",
-    "authors": [
-        {
-            "name": "david.didnik",
-            "email": "david.didnik@leplusduweb.com"
-        }
-    ],
-    "autoload": {
-        "psr-4": {
-          "App\\": "src/"
-        }
-    },
-    "require": {
-        "twig/twig": "^3.7",
-        "vlucas/phpdotenv": "^5.5"
-    },
-    "require-dev": {
-        "symfony/var-dumper": "^6.3",
-        "laravel/pint": "^1.13"
+  "name": "ddidn/blog-php",
+  "description": "Blog php from scratch, for a school project",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "david.didnik",
+      "email": "david.didnik@leplusduweb.com"
     }
+  ],
+  "autoload": {
+    "psr-4": {
+      "App\\": "src/"
+    }
+  },
+  "require": {
+    "twig/twig": "^3.7",
+    "vlucas/phpdotenv": "^5.5"
+  },
+  "require-dev": {
+    "symfony/var-dumper": "^6.3",
+    "laravel/pint": "^1.13"
+  }
 }
