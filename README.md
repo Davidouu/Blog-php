@@ -8,7 +8,7 @@ OpenClassrooms poeject, a blog php from scratch, using composer, OOP and MVC mod
 
 | Dependency | Version |
 | ---------- | ------- |
-| PHP        | >=8.0   |
+| PHP        | =8.1    |
 | Composer   |         |
 
 ## Run locally
